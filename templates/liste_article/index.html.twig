@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ListeArticle index{% endblock %}
+
+{% block body %}
+    <h1>ListeArticle index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Est_achete</th>
+                <th>Quantite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for liste_article in liste_articles %}
+            <tr>
+                <td>{{ liste_article.id }}</td>
+                <td>{{ liste_article.estAchete ? 'Yes' : 'No' }}</td>
+                <td>{{ liste_article.quantite }}</td>
+                <td>
+                    <a href="{{ path('app_liste_article_show', {'id': liste_article.id}) }}">show</a>
+                    <a href="{{ path('app_liste_article_edit', {'id': liste_article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_liste_article_new') }}">Create new</a>
+{% endblock %}

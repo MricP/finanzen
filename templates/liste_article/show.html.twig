@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ListeArticle{% endblock %}
+
+{% block body %}
+    <h1>ListeArticle</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ liste_article.id }}</td>
+            </tr>
+            <tr>
+                <th>Est_achete</th>
+                <td>{{ liste_article.estAchete ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ liste_article.quantite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_liste_article_index') }}">back to list</a>
+
+    <a href="{{ path('app_liste_article_edit', {'id': liste_article.id}) }}">edit</a>
+
+    {{ include('liste_article/_delete_form.html.twig') }}
+{% endblock %}
