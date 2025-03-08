@@ -1,4 +1,4 @@
-.login-flex-container{
+.login-flex-container, .register-flex-container{
     display: flex;
     height: 100%;
     width: 100%;
@@ -26,6 +26,12 @@
     align-items: center;
     justify-content: center;
     width: 25%;
+    height: 100%;
+}
+
+.alert-danger {
+    color: var(--error-color);
+    text-align: center;
 }
 
 .form-container{
@@ -36,7 +42,7 @@
     flex-direction: column;
 }
 
-.infos-login{
+.infos-login, .infos-register{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,32 +50,33 @@
     margin-bottom: 20px;
 }
 
-.infos-login img{
+.infos-login img, .infos-register img{
     width: 50%;
     height: 50%;
 }
 
 
-.infos-login a{
+.infos-login a, .infos-register a{
     margin-top: -20px;
     text-decoration: underline;
     color:var(--text-color-primary);
+    font-size: 0.8rem;
 }
 
-.form-login {
+.form-login, .form-register {
     flex-direction: column;
     display: flex;
     margin: 25px;
 }
 
-.form-login label{
+.form-login label, .form-register label{
     color: var(--color-primary);
     font-weight: bold;
     margin-top: 7px;
     margin-bottom: 5px;
 }
 
-.form-login input{
+.form-login input, .form-register input{
     padding-top: 10px;
     padding-bottom: 10px;
     border: none;
@@ -84,9 +91,40 @@
     text-decoration: none;
 }
 
-.form-login button {
+.form-login button, .form-register button {
     padding-top: 10px;
     padding-bottom: 10px;
      background-color: var(--color-primary);
     color: var(--text-color-secondary);
+}
+
+.input-email-register, .input-password, .input-confirm-password{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.agree-terms-checkbox{
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .login-flex-container {
+        flex-direction: column;
+    }
+
+    .flex-1 {
+        display: none;
+    }
+
+    .flex-2 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

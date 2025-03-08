@@ -9,8 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Routing\Attribute\Route;
 
 class RegistrationController extends AbstractController
 {
@@ -21,35 +20,23 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        // Validation de l'email
         if ($form->isSubmitted() && $form->isValid()) {
-            $email = $user->getEmail();
-            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
-
-            if ($existingUser) {
-                // Si un utilisateur avec cet email existe déjà, ajoute un message d'erreur
-                $this->addFlash('error', 'An account with this email already exists.');
-                return $this->redirectToRoute('app_register');
-            }
-
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-            // Hashage du mot de passe
+            // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // On peut ajouter des actions supplémentaires comme l'envoi d'un email de confirmation
-            $this->addFlash('success', 'Registration successful!');
+            // do anything else you need here, like send an email
 
-            // Redirection après inscription
             return $this->redirectToRoute('app_liste_index');
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'registrationForm' => $form,
         ]);
     }
 }
