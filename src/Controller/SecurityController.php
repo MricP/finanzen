@@ -17,6 +17,11 @@ class SecurityController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if($user){
+            return $this->redirectToRoute('app_liste_index');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -42,12 +47,15 @@ class SecurityController extends AbstractController
     public function setPseudo(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-
-        // if ($user->getPseudo()) {
-        //     return $this->redirectToRoute('app_liste_index'); 
-        // }
+        
         if (!$user) {
             return $this->redirectToRoute('app_login');
+        }
+
+        if ($user instanceof User) {
+            if ($user->getPseudo()) {
+                return $this->redirectToRoute('app_liste_index');
+            }
         }
 
         $form = $this->createFormBuilder($user)
@@ -67,17 +75,29 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            if (!$user->getPseudo()) {
+                return $this->redirectToRoute('app_set_pseudo');
+            }
+        }
+
+        if($user){
+            return $this->redirectToRoute('app_liste_index');
+        }
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
     }
+
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void

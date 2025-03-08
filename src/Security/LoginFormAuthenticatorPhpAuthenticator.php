@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Security;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -54,14 +55,17 @@ class LoginFormAuthenticatorPhpAuthenticator extends AbstractLoginFormAuthentica
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // Redirige l'utilisateur après une connexion réussie
+        // Vérifie s'il existe un chemin de redirection
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        // Redirection vers la page d'accueil
-        return new RedirectResponse($this->urlGenerator->generate('app_home')); // Change 'app_home' par la route de ton choix
+        // Sinon, redirige vers la page de liste
+        $redirectUrl = $this->urlGenerator->generate('app_liste_index');
+        dump($redirectUrl); // Pour déboguer
+        return new RedirectResponse($redirectUrl);
     }
+
 
     protected function getLoginUrl(Request $request): string
     {

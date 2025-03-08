@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/sign.css') }}">
+   	{{ parent() }}
+ <link rel="stylesheet" href="{{ asset('css/sign.css') }}?v={{ "now"|date("YmdHis") }}">
 {% endblock %}
 
 {% block body %}
@@ -31,16 +31,10 @@
 					{% if error %}
 						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 					{% endif %}
-					{% if app.user %}
-						<div class="mb-3">
-							You are logged in as
-							{{ app.user.userIdentifier }},
-							<a href="{{ path('app_logout') }}">Logout</a>
-						</div>
-					{% endif %}
 					<button class="btn btn-lg btn-primary" type="submit">
 						Login
 					</button>
+					<a class="register_link" href="{{ path('app_register') }}">Pas encore inscrit ?</a>
 				</form>
 			</div>
 		</div>

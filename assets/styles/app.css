@@ -16,7 +16,6 @@
 }
 
 body {
-    background-color: var(--color-primary);
     font-family: 'Inter', sans-serif;
     color: var(--text-color-primary);
     padding: 0;

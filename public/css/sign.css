@@ -1,3 +1,7 @@
+body {
+    background-color: var(--color-primary);
+}
+
 .login-flex-container,
 .register-flex-container,
 .pseudo-flex-container {
@@ -62,8 +66,7 @@
 }
 
 .infos-login img,
-.infos-register img
-.infos-pseudo img {
+.infos-register img .infos-pseudo img {
     width: 50%;
     height: 50%;
 }
@@ -102,6 +105,17 @@
     padding-bottom: 10px;
     border: none;
     background-color: var(--gray-color-input);
+}
+
+.login_link,
+.register_link {
+    margin-top: 15px;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    font-size: 0.8rem;
+    color: var(--text-color-primary);
+    text-decoration: none;
 }
 
 .forgot_pwd_link {
