@@ -8,17 +8,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $user = $this->getUser();
-        if($user){
+        if ($this->getUser()) {
             return $this->redirectToRoute('app_liste_index');
         }
 
@@ -27,13 +27,15 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
-
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $entityManager->persist($user);
             $entityManager->flush();
+
+            // Stocker l'email en session pour retrouver l'utilisateur ensuite
+            $session->set('from_registration', true);
+            $session->set('user_email', $user->getEmail());
 
             return $this->redirectToRoute('app_set_pseudo');
         }
@@ -44,21 +46,26 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/set-pseudo', name: 'app_set_pseudo')]
-    public function setPseudo(Request $request, EntityManagerInterface $entityManager): Response
+    public function setPseudo(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
         $user = $this->getUser();
-        
-        if (!$user) {
+        $fromRegistration = $session->get('from_registration', false);
+        $userEmail = $session->get('user_email', '');
+
+        // Si l'utilisateur n'est pas connecté, on le cherche en BDD via l'email stocké
+        if (!$user instanceof User && $userEmail) {
+            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $userEmail]);
+        }
+
+        if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         }
 
-        if ($user instanceof User) {
-            if ($user->getPseudo()) {
-                return $this->redirectToRoute('app_liste_index');
-            }
+        if ($fromRegistration) {
+            $session->remove('from_registration');
         }
 
-        $form = $this->createFormBuilder($user)
+            $form = $this->createFormBuilder($user)
             ->add('pseudo')
             ->getForm();
 
@@ -66,12 +73,12 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            return $this->redirectToRoute('app_liste_index');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('security/set_pseudo.html.twig', [
             'form' => $form->createView(),
-            'user_email' => $user->getUserIdentifier(),
+            'user_email' => $user->getEmail(),
         ]);
     }
 
@@ -82,13 +89,11 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         $user = $this->getUser();
+
         if ($user instanceof User) {
             if (!$user->getPseudo()) {
                 return $this->redirectToRoute('app_set_pseudo');
             }
-        }
-
-        if($user){
             return $this->redirectToRoute('app_liste_index');
         }
 
@@ -97,7 +102,6 @@ class SecurityController extends AbstractController
             'error' => $error,
         ]);
     }
-
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
