@@ -1,27 +1,35 @@
 security:
     password_hashers:
         App\Entity\User:
-            algorithm: auto  
-            cost: 12  
-
-    firewalls:
-        login:
-            pattern: ^/$
-            security: false
-
-        main:
-            pattern: ^/
-            form_login:
-                login_path: app_login
-                check_path: app_login
-                default_target_path: app_liste_index
-            logout:
-                path: /logout
-                target: /
-            provider: app_user_provider
+            algorithm: bcrypt
 
     providers:
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/   
+            security: false
+
+        main:
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                username_parameter: email
+                password_parameter: password
+            
+            entry_point: App\Security\LoginFormAuthenticatorPhpAuthenticator  
+
+            logout:
+                path: app_logout
+                target: app_home
+
+            provider: app_user_provider
+
+    access_control:
+        # - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: /register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: /set-pseudo, roles: ROLE_USER }
