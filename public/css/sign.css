@@ -1,11 +1,13 @@
-.login-flex-container, .register-flex-container{
+.login-flex-container,
+.register-flex-container,
+.pseudo-flex-container {
     display: flex;
     height: 100%;
     width: 100%;
     height: 96vh;
 }
 
-.flex-1{
+.flex-1 {
     flex-direction: column;
     display: flex;
     align-items: start;
@@ -14,12 +16,12 @@
     width: 75%;
 }
 
-.flex-1 img{
+.flex-1 img {
     height: 90%;
     width: 90%;
 }
 
-.flex-2{
+.flex-2 {
     background-color: var(--color-secondary);
     flex-direction: column;
     display: flex;
@@ -34,7 +36,7 @@
     text-align: center;
 }
 
-.form-container{
+.form-container {
     width: 100%;
     display: flex;
     justify-items: center;
@@ -42,7 +44,9 @@
     flex-direction: column;
 }
 
-.infos-login, .infos-register{
+.infos-login,
+.infos-register,
+.infos-pseudo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,40 +54,57 @@
     margin-bottom: 20px;
 }
 
-.infos-login img, .infos-register img{
+.pseudo-infos-text {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.infos-login img,
+.infos-register img
+.infos-pseudo img {
     width: 50%;
     height: 50%;
 }
 
 
-.infos-login a, .infos-register a{
+.infos-login a,
+.infos-register a,
+.infos-pseudo a {
     margin-top: -20px;
     text-decoration: underline;
-    color:var(--text-color-primary);
+    color: var(--text-color-primary);
     font-size: 0.8rem;
 }
 
-.form-login, .form-register {
+.form-login,
+.form-register,
+.form-pseudo {
     flex-direction: column;
     display: flex;
     margin: 25px;
 }
 
-.form-login label, .form-register label{
+.form-login label,
+.form-register label,
+.form-pseudo label {
     color: var(--color-primary);
     font-weight: bold;
     margin-top: 7px;
     margin-bottom: 5px;
 }
 
-.form-login input, .form-register input{
+.form-login input,
+.form-register input,
+.form-pseudo input {
     padding-top: 10px;
     padding-bottom: 10px;
     border: none;
     background-color: var(--gray-color-input);
 }
 
-.forgot_pwd_link{
+.forgot_pwd_link {
     padding-bottom: 10px;
     padding-top: 5px;
     font-size: 0.8rem;
@@ -91,14 +112,19 @@
     text-decoration: none;
 }
 
-.form-login button, .form-register button {
+.form-login button,
+.form-register button,
+.form-pseudo button {
     padding-top: 10px;
     padding-bottom: 10px;
-     background-color: var(--color-primary);
+    background-color: var(--color-primary);
     color: var(--text-color-secondary);
 }
 
-.input-email-register, .input-password, .input-confirm-password{
+.input-email-register,
+.input-password,
+.input-confirm-password,
+.input-pseudo {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -107,7 +133,7 @@
     margin-bottom: 10px;
 }
 
-.agree-terms-checkbox{
+.agree-terms-checkbox {
     margin-bottom: 10px;
 }
 

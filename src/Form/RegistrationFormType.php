@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Form;
 
 use App\Entity\User;
@@ -16,11 +17,13 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'label' => 'Email*',
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Confirm Password'],
+                'first_options' => ['label' => 'Mot de passe*'],
+                'second_options' => ['label' => 'Confirmer mot de passe*'],
                 'invalid_message' => 'The password fields must match.',
                 'mapped' => false,
             ])

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Set your pseudo
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/sign.css') }}">
+{% endblock %}
+{% block body %}
+	<div class='pseudo-flex-container'>
+		<div class='flex-1'>
+			<img src="{{ asset('images/pseudo-img.svg') }}" alt="pseudo Image">
+		</div>
+		<div class='flex-2'>
+			<div class="infos-pseudo">
+				<img src="{{ asset('images/logos/logo-finanzen1.svg') }}" alt="FinanZen Logo">
+				<h1 class="h3 mb-3 font-weight-normal">FinanZen</h1>
+				<a href="#">Politique de cookies</a>
+			</div>
+            <div class="pseudo-infos-text">
+            <p><strong>Bienvenue</strong> {{user_email}}</p>
+            <p>tu dois choisir un pseudo car comme tu le vois ton adresse email est un peu longue ... 😊</p>
+            </div>
+			<div class='form-container'>
+				{{ form_start(form, {'attr': {'class': 'form-pseudo'}}) }}
+				{{ form_row(form.pseudo,{'label': 'Pseudo*', 'attr': {'class': 'input-pseudo'}}) }}
+				<button type="submit" class="btn">Set Pseudo</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
