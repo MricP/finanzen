@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('/finanzen/public/fonts/Inter_18pt-Medium.ttf  ') format('truetype'),
+         url('/finanzen/public/fonts/Inter_18pt-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root{
+    --color-primary : #242861;
+    --color-secondary : #FFFFFF;
+    --text-color-primary: black;
+    --text-color-secondary : #FFFFFF;
+    --gray-color-input: #D9D9D9;
+}
+
 body {
-    background-color: skyblue;
+    background-color: var(--color-primary);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color-primary);
+    padding: 0;
+    margin: 0;
 }

@@ -1,0 +1,92 @@
+.login-flex-container{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    height: 96vh;
+}
+
+.flex-1{
+    flex-direction: column;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    height: 100%;
+    width: 75%;
+}
+
+.flex-1 img{
+    height: 90%;
+    width: 90%;
+}
+
+.flex-2{
+    background-color: var(--color-secondary);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+}
+
+.form-container{
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.infos-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.infos-login img{
+    width: 50%;
+    height: 50%;
+}
+
+
+.infos-login a{
+    margin-top: -20px;
+    text-decoration: underline;
+    color:var(--text-color-primary);
+}
+
+.form-login {
+    flex-direction: column;
+    display: flex;
+    margin: 25px;
+}
+
+.form-login label{
+    color: var(--color-primary);
+    font-weight: bold;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+
+.form-login input{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    background-color: var(--gray-color-input);
+}
+
+.forgot_pwd_link{
+    padding-bottom: 10px;
+    padding-top: 5px;
+    font-size: 0.8rem;
+    color: var(--text-color-primary);
+    text-decoration: none;
+}
+
+.form-login button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+     background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+}
