@@ -20,26 +20,34 @@ li {
 
 .statistic-zone{
     display: flex;
-    gap: 50px;
+    gap: 10px;
 }
 
 .statistic{
      border: 3px dashed #242861;
-     padding: 20px;
+     padding: 10px;
 }
-.statistic > div{
-    display: flex;
-    align-items: center;
-    justify-content: right;
-}
+
 .statistic-zone > div{
     background-color: #d9d9d9;
 }
 
 
 .main-statistic-zone{
-    width: 500px;
-    height: 250px;
+    width: 30%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.main-statistic-zone >div{
+    line-height: 5px;
+}
+
+.main-statistic-zone > a{
+    text-align: center;
 }
 
 .main-statistic-price{
@@ -49,14 +57,12 @@ li {
 }
 
 .secondary-statistic-zone{
-    width: 800px;
-    height: 250px;
+    width: 70%;
     padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 5px;
-    margin-bottom: 50px;
 }
 
 .secondary-statistic-price{
@@ -69,6 +75,38 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: max-content;
+    height: 45px;
+}
+
+.third-statistic-zone{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     height: 50px;
+    justify-content: right;
+    gap: 10px;
+}
+
+@media(max-width: 750px){
+    .statistic-zone{
+        flex-direction: column-reverse;
+        gap: 5px;
+        padding: 2%;
+    }
+
+    .statistic-zone > div{
+        padding: 0px;
+    }
+
+    .secondary-statistic-zone{
+        width: 100%
+    }
+    .main-statistic-zone{
+        width: 100%;
+    }
+
+    .main-statistic-zone > div{
+        text-align: center;
+    }
+    
 }
