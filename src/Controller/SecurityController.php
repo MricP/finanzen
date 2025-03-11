@@ -48,9 +48,13 @@ class SecurityController extends AbstractController
     #[Route('/set-pseudo', name: 'app_set_pseudo')]
     public function setPseudo(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $user = $this->getUser();
+        $user = $this->getUser(); 
         $fromRegistration = $session->get('from_registration', false);
         $userEmail = $session->get('user_email', '');
+
+        if($user){
+            return $this->redirectToRoute('app_liste_index');
+        }
 
         // Si l'utilisateur n'est pas connecté, on le cherche en BDD via l'email stocké
         if (!$user instanceof User && $userEmail) {
@@ -65,7 +69,7 @@ class SecurityController extends AbstractController
             $session->remove('from_registration');
         }
 
-            $form = $this->createFormBuilder($user)
+        $form = $this->createFormBuilder($user)
             ->add('pseudo')
             ->getForm();
 
