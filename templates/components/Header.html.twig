@@ -1,19 +1,20 @@
 <header{{attributes}}>
     <div class="logo-finanzen">
-        <img src="" alt="logo finanzen avec un caddie dedans"/>
-    <div>
+        <img src="{{ asset('images/logos/logo-finanzen1.svg') }}" class="logo-finanzen"
+            alt="logo finanzen avec un caddie dedans" />
+    </div>
     <nav>
-    <a href="{{ path('app_home') }}">Mes listes</a>
-    <a href="{{ path('') }}">Ajouter une liste</a>
-    <a href="{{ path('') }}">
-        <img src="" alt="image de profil de l'utilisateur"/>
-    </a>    
-	{% if app.user %}
-		<div class="mb-3">
-			You are logged in as
-			{{ app.user.userIdentifier }},
-			<a href="{{ path('app_logout') }}">Logout</a>
-		</div>
-	{% endif %}
+        <a href="{{ path('app_home') }}">Mes listes</a>
+        <a class="add-list-link" href="{{ path('app_liste_new') }}">Ajouter une liste</a>
+        <button class="btn-profile-user">
+            <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
+                alt="image de profil de l'utilisateur" />
+        </button>
+        {% if app.user %}
+        <div class="mb-3">
+            {# {{ app.user.userIdentifier }},
+            <a href="{{ path('app_logout') }}">Logout</a> #}
+        </div>
+        {% endif %}
     </nav>
-</header>
+    </header>

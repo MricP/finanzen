@@ -21,3 +21,48 @@ body {
     padding: 0;
     margin: 0;
 }
+
+header{
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap:1.2rem;
+}
+
+nav a{
+    color: var(--text-color-primary);
+    text-decoration: none;
+}
+
+nav a:hover{
+    text-decoration: underline;
+}
+
+.logo-finanzen, .default-user-icon {
+    width: 60px;
+    height: 60px;
+}
+
+header button{
+    border: none;
+}
+
+.add-list-link{
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    padding: 10px;
+}
+
+.logged-body{
+    padding-left: 10vh;
+    padding-right: 10vh;
+}

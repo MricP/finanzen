@@ -8,10 +8,6 @@ h1 {
 
 p {
     color: black;
-<<<<<<< HEAD
-=======
-    font-size: .8em;
->>>>>>> e65ad201c8e46e407ec84a7da65e7825b3c97426
 }
 
 ul {
@@ -22,108 +18,6 @@ li {
     list-style: none;
 }
 
-<<<<<<< HEAD
-a{
-    text-decoration: none;
-    color: black;
-}
-
-a:hover{
-    color: #242861;
-}
-
-.statistic-zone{
-    display: flex;
-    gap: 10px;
-}
-
-.statistic{
-     border: 3px dashed #242861;
-     padding: 10px;
-}
-
-.statistic-zone > div{
-    background-color: #d9d9d9;
-}
-
-
-.main-statistic-zone{
-    width: 30%;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 5px;
-}
-
-.main-statistic-zone >div{
-    line-height: 5px;
-}
-
-.main-statistic-zone > a{
-    text-align: center;
-}
-
-.main-statistic-price{
-    color: #242861;
-    font-size: 2em;
-    font-weight: 600;
-}
-
-.secondary-statistic-zone{
-    width: 70%;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 5px;
-}
-
-.secondary-statistic-price{
-    color: #242861;
-    font-size: 1.75em;
-    font-weight: 600;
-}
-
-.secondary-statistic-row{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 45px;
-}
-
-.third-statistic-zone{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 50px;
-    justify-content: right;
-    gap: 10px;
-}
-
-@media(max-width: 750px){
-    .statistic-zone{
-        flex-direction: column-reverse;
-        gap: 5px;
-        padding: 2%;
-    }
-
-    .statistic-zone > div{
-        padding: 0px;
-    }
-
-    .secondary-statistic-zone{
-        width: 100%
-    }
-    .main-statistic-zone{
-        width: 100%;
-    }
-
-    .main-statistic-zone > div{
-        text-align: center;
-    }
-    
-=======
 .liste {
     display: flex;
     flex-direction: column;
@@ -222,5 +116,4 @@ select {
     border-radius: 0.25rem;
     color: #000;
     cursor: pointer;
->>>>>>> e65ad201c8e46e407ec84a7da65e7825b3c97426
 }
