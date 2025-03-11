@@ -137,6 +137,7 @@ svg.trash {
 
 hr.dotted {
     border-top: 3px dotted #aaa;
+    width: 100%;
 }
 
 li h2 {
