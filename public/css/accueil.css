@@ -18,6 +18,15 @@ li {
     list-style: none;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    color: #242861;
+}
+
 .statistic-zone{
     display: flex;
     gap: 10px;
