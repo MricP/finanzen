@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="{{ asset('css/statistique.css') }}" rel="stylesheet" type="text/css">
+<div class="example-wrapper" >
+    <div class="statistic">
+        <div class="statistic-zone">
+            <div class="main-statistic-zone">
+                <div>
+                    <p>Somme dépensée cette année</p>
+                    <p class="main-statistic-price">1005.42€</p>
+                </div>
+                <div>
+                    <p>Somme total dépensée ce mois</p>
+                    <p class="main-statistic-price">585.85€</p>
+                </div>
+            </div>
+            <div class="secondary-statistic-zone">
+                <div class="secondary-statistic-row">
+                    <p>Coût par article :</p>
+                    <p class="secondary-statistic-price">12.85€</p>
+                </div>
+                <div class="secondary-statistic-row">
+                    <p>L'article le plus cher :</p>
+                    <p class="secondary-statistic-price">42.51€</p>
+                </div>
+                <div class="secondary-statistic-row">
+                    <p>L'article le moins cher :</p>
+                    <p class="secondary-statistic-price">1.10€</p>
+                </div>
+            </div>
+        </div>
+        <div class="third-statistic-zone">
+            <p>budget mensuel :</p>
+            <p class="secondary-statistic-price">523.55€</p>
+        </div>
+</div>
+{# Graphique #}
+    <div class="graph">
+        <h2>Graphique des courses</h2>
+    </div>
+
+    <div>
+        <h3>Diagrammes des dépenses par mois</h3>
+        <canvas id="barChart"></canvas>
+    </div>
+    <div>
+        <h3>Diagrammes des achats par catégories</h3>
+        <canvas id="radarChart"></canvas>
+    </div>
+
+<script>
+  var barChart = document.getElementById('barChart');
+  var radarChart = document.getElementById('radarChart');
+
+if(barChart){
+  new Chart(barChart, {
+    type: 'bar',
+    data: {
+      labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      datasets: [{
+        label: 'Argent dépensé par mois',
+        data: [150, 215, 650, 430, 555, 346,465,402,350,385,430,750],
+        borderWidth: 1,
+        borderColor: '#242861',
+        backgroundColor: '#24286150',
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+const data = {
+  labels: [
+    'Nouriture',
+    'Boisson',
+    'Produit ménager',
+    'Dessert',
+    'Repas préparé',
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [65, 59, 90, 81,15],
+    fill: true,
+    backgroundColor: '#24286150',
+    borderColor: '#242861',
+    pointBackgroundColor: '#24286150',
+    pointBorderColor: '#242861',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: '#242861'
+  }]
+};
+
+const config = {
+  type: 'radar',
+  data: data,
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    }
+  },
+};
+if(radarChart){
+    new Chart(radarChart, config)
+}
+    
+</script>
+{% endblock %}
