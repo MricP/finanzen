@@ -15,11 +15,7 @@ class ListeType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('utilisateurs', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
+
         ;
     }
 

@@ -1,0 +1,120 @@
+body {
+    background-color: #F0F0F0;
+}
+
+h1 {
+    color: #242861;
+}
+
+p {
+    color: black;
+    font-size: .8em;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.liste {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26%;
+    height: 35vh;
+    border : 1px solid black;
+    padding: 10px;
+    margin: 15px 15px 15px 0;
+    background-image: url("/assets/images/wrinkled-paper-texture-7.jpg") ;
+    background-size: 200%;
+    /*background-repeat: no-repeat;*/
+}
+
+.listes {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+}
+
+svg.trash {
+    height : 4vh;
+}
+
+.list-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.list-header p {
+    width: 100%;
+    text-align: right;
+}
+
+
+
+hr.dotted {
+    border-top: 3px dotted #aaa;
+}
+
+li h2 {
+    text-align: center;
+    font-size: large;
+}
+
+.list-item {
+    padding: 10px;
+}
+.list-items {
+    padding: 10px;
+}
+
+.list-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-footer a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+
+}
+
+svg.arrow {
+    height: 3vh;
+}
+
+#filtre svg {
+    height: 3vh;
+}
+
+#filtre {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    min-width: 20vw;
+    max-width: 20vw;
+
+}
+
+select {
+    height: 5vh;
+    appearance: none;
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.675em 6em 0.675em 1em;
+    background-color: #fff;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    color: #000;
+    cursor: pointer;
+}

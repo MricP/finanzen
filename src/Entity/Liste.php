@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ListeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ListeRepository::class)]
@@ -30,10 +31,14 @@ class Liste
     #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'listes')]
     private Collection $utilisateurs;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateCreation = null;
+
     public function __construct()
     {
         $this->listeArticles = new ArrayCollection();
         $this->utilisateurs = new ArrayCollection();
+        $this->dateCreation = new \DateTime();
     }
 
     public function getId(): ?int
@@ -106,6 +111,18 @@ class Liste
         if ($this->utilisateurs->removeElement($utilisateur)) {
             $utilisateur->removeListe($this);
         }
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): static
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
