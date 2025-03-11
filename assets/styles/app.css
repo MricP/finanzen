@@ -22,7 +22,7 @@ body {
     margin: 0;
 }
 
-header{
+header {
     padding: 40px;
     display: flex;
     flex-direction: row;
@@ -30,39 +30,107 @@ header{
     align-items: center;
 }
 
-nav{
+nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap:1.2rem;
+    gap: 1.2rem;
 }
 
-nav a{
+nav a {
     color: var(--text-color-primary);
     text-decoration: none;
 }
 
-nav a:hover{
+nav a:hover {
     text-decoration: underline;
 }
 
-.logo-finanzen, .default-user-icon {
+.logo-finanzen,
+.default-user-icon {
     width: 60px;
     height: 60px;
 }
 
-header button{
+header button {
     border: none;
 }
 
-.add-list-link{
+.add-list-link {
     color: var(--color-secondary);
     background-color: var(--color-primary);
     padding: 10px;
 }
 
-.logged-body{
+.logged-body {
     padding-left: 10vh;
     padding-right: 10vh;
+}
+.profile-bg {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+#profilePopup {
+    display: none;
+}
+
+#profilePopup.visible {
+    display: flex;
+}
+
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--color-secondary);
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    position: relative;
+    max-width: 90%;
+    width: 400px;
+}
+
+.profile-infos {
+    text-align: center;
+}
+
+.profile-infos p {
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.profile-infos a {
+    color: #ff4d4f;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.profile-infos a:hover {
+    text-decoration: underline;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #ff4d4f;
 }

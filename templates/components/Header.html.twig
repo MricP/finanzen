@@ -1,3 +1,6 @@
+{% block javascripts %}
+<script src="{{ asset('js/header.js') }}"></script>
+{% endblock %}
 <header{{attributes}}>
     <div class="logo-finanzen">
         <img src="{{ asset('images/logos/logo-finanzen1.svg') }}" class="logo-finanzen"
@@ -11,9 +14,17 @@
                 alt="image de profil de l'utilisateur" />
         </button>
         {% if app.user %}
-        <div class="mb-3">
-            {# {{ app.user.userIdentifier }},
-            <a href="{{ path('app_logout') }}">Logout</a> #}
+        <div class="profile-bg" id="profilePopup">
+            <div class="profile-container">
+                <div class="profile-infos">
+                    <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
+                        alt="image de profil de l'utilisateur" />
+                    <p>Hello, {{ app.user.userIdentifier }}</p>
+                    <button>Modifier</button>
+                    <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+                <button class="close-btn">✕</button>
+            </div>
         </div>
         {% endif %}
     </nav>
