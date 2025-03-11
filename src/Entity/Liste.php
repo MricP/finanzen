@@ -24,16 +24,9 @@ class Liste
     #[ORM\OneToMany(targetEntity: ListeArticle::class, mappedBy: 'listes', orphanRemoval: true)]
     private Collection $listeArticles;
 
-    /**
-     * @var Collection<int, Utilisateur>
-     */
-    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'listes')]
-    private Collection $utilisateurs;
-
     public function __construct()
     {
         $this->listeArticles = new ArrayCollection();
-        $this->utilisateurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,32 +75,4 @@ class Liste
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Utilisateur>
-     */
-    public function getUtilisateurs(): Collection
-    {
-        return $this->utilisateurs;
-    }
-
-    public function addUtilisateur(Utilisateur $utilisateur): static
-    {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->addListe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUtilisateur(Utilisateur $utilisateur): static
-    {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
-            $utilisateur->removeListe($this);
-        }
-
-        return $this;
-    }
-
 }
