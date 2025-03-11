@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/Inter_18pt-Medium.ttf  ') format('truetype'),
+    src: url('/fonts/Inter_18pt-Medium.ttf') format('truetype'),
         url('/fonts/Inter_18pt-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
@@ -22,11 +22,283 @@ body {
     margin: 0;
 }
 
+.logged-body {
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+/* HEADER */
+header {
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-nav,
+.destock-nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+.destock-nav {
+    display: flex;
+}
+
+nav a {
+    color: var(--text-color-primary);
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.logo-finanzen,
+.default-user-icon {
+    width: 60px;
+    height: 60px;
+}
+
+header button {
+    border: none;
+}
+
+.add-list-link {
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    padding: 10px;
+}
+
+.profile-bg {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+#profilePopup {
+    display: none;
+}
+
+#profilePopup.visible {
+    display: flex;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--color-secondary);
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    position: relative;
+    max-width: 90%;
+    width: 400px;
+}
+
+.profile-infos {
+    text-align: center;
+}
+
+.profile-infos p {
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.profile-infos a {
+    color: #ff4d4f;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.profile-infos a:hover {
+    text-decoration: underline;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #ff4d4f;
+}
+
+.mobile-nav {
+    display: none;
+    position: relative;
+}
+
+.menu-burger {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-column-links {
+    display: none;
+    flex-direction: column;
+    background: var(--color-primary);
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 200px;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-column-links a {
+    color: var(--color-secondary);
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.header-column-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.header-column-links.visible {
+    display: flex;
+}
 
 
+main {
+    height: 100vh;
+}
 
+/* FOOTER */
+footer {
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
 
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 20px;
+}
 
+.logo-footer {
+    margin-right: 45px;
+}
 
+.polities-links,
+.importants-links {
+    display: flex;
+    flex-direction: column;
+}
 
+.polities-links a,
+.importants-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
 
+.polities-links {
+    text-align: right;
+}
+
+.importants-links {
+    text-align: left;
+}
+
+.polities-links a:hover,
+.importants-links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .destock-nav {
+        display: none;
+    }
+
+    .header-column-links {
+        flex-direction: column;
+        display: none;
+    }
+
+    .header-column-links.visible {
+        display: flex;
+    }
+
+    .menu-burger {
+        font-size: 1.5rem;
+    }
+
+    .mobile-nav {
+        display: flex;
+    }
+
+    .logo-footer {
+        margin-right: 0;
+    }
+
+    .destock-copyrights {
+        display: none;
+    }
+
+    .mobile-copyrights {
+        display: block;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .importants-links a {
+        text-align: center;
+    }
+
+    .polities-links a {
+        text-align: center;
+    }
+
+    .logged-body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    .default-user-icon {
+        width: 30px;
+        height: 30px;
+        margin-top: 7px;
+    }
+    
+}

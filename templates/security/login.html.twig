@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block stylesheets %}
-   	{{ parent() }}
- <link rel="stylesheet" href="{{ asset('css/sign.css') }}?v={{ "now"|date("YmdHis") }}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/sign.css') }}?v={{ "now"|date("YmdHis") }}">
 {% endblock %}
 
 {% block body %}
@@ -32,7 +32,7 @@
 						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 					{% endif %}
 					<button class="btn btn-lg btn-primary" type="submit">
-						Login
+						Se connecter
 					</button>
 					<a class="register_link" href="{{ path('app_register') }}">Pas encore inscrit ?</a>
 				</form>
