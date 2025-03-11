@@ -1,0 +1,19 @@
+<header{{attributes}}>
+    <div class="logo-finanzen">
+        <img src="" alt="logo finanzen avec un caddie dedans"/>
+    <div>
+    <nav>
+    <a href="{{ path('app_home') }}">Mes listes</a>
+    <a href="{{ path('') }}">Ajouter une liste</a>
+    <a href="{{ path('') }}">
+        <img src="" alt="image de profil de l'utilisateur"/>
+    </a>    
+	{% if app.user %}
+		<div class="mb-3">
+			You are logged in as
+			{{ app.user.userIdentifier }},
+			<a href="{{ path('app_logout') }}">Logout</a>
+		</div>
+	{% endif %}
+    </nav>
+</header>
