@@ -22,6 +22,8 @@ body {
     margin: 0;
 }
 
+
+/* HEADER NAVBAR */
 header {
     padding: 40px;
     display: flex;
@@ -133,4 +135,81 @@ header button {
 
 .close-btn:hover {
     color: #ff4d4f;
+}
+
+main{
+    height: 100vh;
+}
+
+
+/* FOOTER */
+footer {
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.logo-footer{
+    margin-right: 45px;
+}
+
+.polities-links, .importants-links{
+    display: flex;
+    flex-direction: column;
+}
+
+.polities-links a, .importants-links a{
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.polities-links{
+    text-align: right;
+}
+
+.importants-links{
+    text-align: left;
+}
+
+.polities-links a:hover, .importants-links a:hover{
+    text-decoration: underline;
+}
+
+@media (max-width : 768px) {
+    .logo-footer {
+        margin-right: 0;
+    }
+
+    .destock-copyrights{
+        display: none;
+    }
+
+    .mobile-copyrights{
+        display: block;
+    }
+
+    .footer-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:2rem;
+    }
+
+    .importants-links a {
+        text-align: center;
+    }
+
+    .polities-links a{
+        text-align: center;
+    }
 }
