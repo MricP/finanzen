@@ -19,7 +19,7 @@ class SecurityController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('app_liste_index');
+            return $this->redirectToRoute('app_home');
         }
 
         $user = new User();
@@ -53,7 +53,7 @@ class SecurityController extends AbstractController
         $userEmail = $session->get('user_email', '');
 
         if($user){
-            return $this->redirectToRoute('app_liste_index');
+            return $this->redirectToRoute('app_home');
         }
 
         // Si l'utilisateur n'est pas connecté, on le cherche en BDD via l'email stocké
@@ -98,7 +98,7 @@ class SecurityController extends AbstractController
             if (!$user->getPseudo()) {
                 return $this->redirectToRoute('app_set_pseudo');
             }
-            return $this->redirectToRoute('app_liste_index');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('security/login.html.twig', [
