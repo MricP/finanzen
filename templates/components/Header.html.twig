@@ -1,31 +1,44 @@
 {% block javascripts %}
 <script src="{{ asset('js/header.js') }}"></script>
 {% endblock %}
-<header{{attributes}}>
+<header{{ attributes }}>
     <div class="logo-finanzen">
         <img src="{{ asset('images/logos/logo-finanzen1.svg') }}" class="logo-finanzen"
             alt="logo finanzen avec un caddie dedans" />
     </div>
-    <nav>
+    <nav class="destock-nav">
         <a href="{{ path('app_home') }}">Mes listes</a>
         <a class="add-list-link" href="{{ path('app_liste_new') }}">Ajouter une liste</a>
         <button class="btn-profile-user">
             <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
                 alt="image de profil de l'utilisateur" />
         </button>
-        {% if app.user %}
-        <div class="profile-bg" id="profilePopup">
-            <div class="profile-container">
-                <div class="profile-infos">
-                    <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
-                        alt="image de profil de l'utilisateur" />
-                    <p>Hello, {{ app.user.userIdentifier }}</p>
-                    <button>Modifier</button>
-                    <a href="{{ path('app_logout') }}">Logout</a>
-                </div>
-                <button class="close-btn">✕</button>
-            </div>
-        </div>
-        {% endif %}
     </nav>
+    <nav class="mobile-nav">
+        <button class="menu-burger" aria-label="Menu">
+            ☰
+        </button>
+        <div class="header-column-links">
+            <a href="{{ path('app_home') }}">Mes listes</a>
+            <a href="{{ path('app_liste_new') }}">Ajouter une liste</a>
+        </div>
+        <button class="btn-profile-user">
+            <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
+                alt="image de profil de l'utilisateur" />
+        </button>
+    </nav>
+    {% if app.user %}
+    <div class="profile-bg" id="profilePopup">
+        <div class="profile-container">
+            <div class="profile-infos">
+                <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
+                    alt="image de profil de l'utilisateur" />
+                <p>Hello, {{ app.user.userIdentifier }}</p>
+                <button>Modifier</button>
+                <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+            <button class="close-btn">✕</button>
+        </div>
+    </div>
+    {% endif %}
     </header>
