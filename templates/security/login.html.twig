@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/sign.css') }}?v={{ "now"|date("YmdHis") }}">
+{% endblock %}
+
+{% block body %}
+	<div class='login-flex-container'>
+		<div class='flex-1'>
+			<img src="{{ asset('images/login-img.svg')}}" alt="img login">
+		</div>
+		<div class='flex-2'>
+			<div class='form-container'>
+				<div class="infos-login">
+					<img src="{{ asset('images/logos/logo-finanzen1.svg')}}" alt="img login">
+					<h1 class="h3 mb-3 font-weight-normal">FinanZen</h1>
+					<a href="">Politique de cookies</a>
+				</div>
+				<form method="post" class="form-login">
+
+					<label for="inputEmail">Email*</label>
+					<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+					<label for="inputPassword">Mot de passe*</label>
+					<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<a class="forgot_pwd_link" href="">Mot de passe oublié ?</a>
+					{% if error %}
+						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+					<button class="btn btn-lg btn-primary" type="submit">
+						Se connecter
+					</button>
+					<a class="register_link" href="{{ path('app_register') }}">Pas encore inscrit ?</a>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

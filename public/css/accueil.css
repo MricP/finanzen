@@ -1,0 +1,225 @@
+body {
+    background-color: #F0F0F0;
+}
+
+h1 {
+    color: #242861;
+}
+
+p {
+    color: black;
+    font-size: .8em;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    color: #242861;
+}
+
+.statistic-zone{
+    display: flex;
+    gap: 10px;
+}
+
+.statistic{
+     border: 3px dashed #242861;
+     padding: 10px;
+}
+
+.statistic-zone > div{
+    background-color: #d9d9d9;
+}
+
+
+.main-statistic-zone{
+    width: 30%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.main-statistic-zone >div{
+    line-height: 5px;
+}
+
+.main-statistic-zone > a{
+    text-align: center;
+}
+
+.main-statistic-price{
+    color: #242861;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.secondary-statistic-zone{
+    width: 70%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.secondary-statistic-price{
+    color: #242861;
+    font-size: 1.75em;
+    font-weight: 600;
+}
+
+.secondary-statistic-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 45px;
+}
+
+.third-statistic-zone{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    justify-content: right;
+    gap: 10px;
+}
+
+.liste {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26%;
+    height: 35vh;
+    border : 1px solid black;
+    padding: 10px;
+    margin: 15px 15px 15px 0;
+    background-image: url("/assets/images/wrinkled-paper-texture-7.jpg") ;
+    background-size: 200%;
+    /*background-repeat: no-repeat;*/
+}
+
+.listes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+svg.trash {
+    height : 4vh;
+}
+
+.list-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.list-header p {
+    width: 100%;
+    text-align: right;
+}
+
+
+
+hr.dotted {
+    border-top: 3px dotted #aaa;
+    width: 100%;
+    margin: 0;
+}
+
+li h2 {
+    text-align: center;
+    font-size: large;
+}
+
+.list-item {
+    padding: 10px;
+}
+.list-items {
+    padding: 10px;
+}
+
+.list-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-footer a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+
+}
+
+svg.arrow {
+    height: 3vh;
+}
+
+#filtre svg {
+    height: 3vh;
+}
+
+#filtre {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    min-width: 20vw;
+    max-width: 20vw;
+
+}
+
+select {
+    height: 5vh;
+    appearance: none;
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.675em 6em 0.675em 1em;
+    background-color: #fff;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    color: #000;
+    cursor: pointer;
+}
+
+
+@media(max-width: 750px){
+    .statistic-zone{
+        flex-direction: column-reverse;
+        gap: 5px;
+        padding: 2%;
+    }
+
+    .statistic-zone > div{
+        padding: 0px;
+    }
+
+    .secondary-statistic-zone{
+        width: 100%
+    }
+    .main-statistic-zone{
+        width: 100%;
+    }
+
+    .main-statistic-zone > div{
+        text-align: center;
+    }
+}

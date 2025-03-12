@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ListeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ListeRepository::class)]
@@ -24,16 +25,14 @@ class Liste
     #[ORM\OneToMany(targetEntity: ListeArticle::class, mappedBy: 'listes', orphanRemoval: true)]
     private Collection $listeArticles;
 
-    /**
-     * @var Collection<int, Utilisateur>
-     */
-    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'listes')]
-    private Collection $utilisateurs;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateCreation = null;
 
     public function __construct()
     {
         $this->listeArticles = new ArrayCollection();
         $this->utilisateurs = new ArrayCollection();
+        $this->dateCreation = new \DateTime();
     }
 
     public function getId(): ?int
@@ -83,29 +82,16 @@ class Liste
         return $this;
     }
 
-    /**
-     * @return Collection<int, Utilisateur>
-     */
-    public function getUtilisateurs(): Collection
+    
+
+    public function getDateCreation(): ?\DateTimeInterface
     {
-        return $this->utilisateurs;
+        return $this->dateCreation;
     }
 
-    public function addUtilisateur(Utilisateur $utilisateur): static
+    public function setDateCreation(\DateTimeInterface $dateCreation): static
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->addListe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUtilisateur(Utilisateur $utilisateur): static
-    {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
-            $utilisateur->removeListe($this);
-        }
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
