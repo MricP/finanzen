@@ -6,8 +6,8 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="{{ asset('css/statistique.css') }}" rel="stylesheet" type="text/css">
+
 <div class="example-wrapper" >
     <div class="statistic">
         <div class="statistic-zone">
@@ -55,68 +55,75 @@
         <canvas id="radarChart"></canvas>
     </div>
 
+<script src="
+  https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js
+"></script>
 <script>
-  var barChart = document.getElementById('barChart');
-  var radarChart = document.getElementById('radarChart');
-
-if(barChart){
-  new Chart(barChart, {
-    type: 'bar',
-    data: {
-      labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      datasets: [{
-        label: 'Argent dépensé par mois',
-        data: [150, 215, 650, 430, 555, 346,465,402,350,385,430,750],
-        borderWidth: 1,
-        borderColor: '#242861',
-        backgroundColor: '#24286150',
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-}
-
-const data = {
-  labels: [
-    'Nouriture',
-    'Boisson',
-    'Produit ménager',
-    'Dessert',
-    'Repas préparé',
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 90, 81,15],
-    fill: true,
-    backgroundColor: '#24286150',
-    borderColor: '#242861',
-    pointBackgroundColor: '#24286150',
-    pointBorderColor: '#242861',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: '#242861'
-  }]
-};
-
-const config = {
-  type: 'radar',
-  data: data,
-  options: {
-    elements: {
-      line: {
-        borderWidth: 3
-      }
-    }
-  },
-};
-if(radarChart){
-    new Chart(radarChart, config)
-}
+  document.addEventListener('DOMContentLoaded', function() {
     
+      var barChart = document.getElementById('barChart');
+      var radarChart = document.getElementById('radarChart');
+
+        new Chart(barChart, {
+          type: 'bar',
+          data: {
+            labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            datasets: [{
+              label: 'Argent dépensé par mois',
+              data: [150, 215, 650, 430, 555, 346, 465, 402, 350, 385, 430, 750],
+              borderWidth: 1,
+              borderColor: '#242861',
+              backgroundColor: '#24286150',
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      
+
+        const data = {
+          labels: [
+            'Nouriture',
+            'Boisson',
+            'Produit ménager',
+            'Dessert',
+            'Repas préparé',
+          ],
+          datasets: [{
+            label: 'My First Dataset',
+            data: [65, 59, 90, 81, 15],
+            fill: true,
+            backgroundColor: '#24286150',
+            borderColor: '#242861',
+            pointBackgroundColor: '#24286150',
+            pointBorderColor: '#242861',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#242861'
+          }]
+        };
+
+        const config = {
+          type: 'radar',
+          data: data,
+          options: {
+            elements: {
+              line: {
+                borderWidth: 3
+              }
+            }
+          },
+        };
+        new Chart(radarChart, config);
+  });
+
+
+  
+  
 </script>
 {% endblock %}
+
