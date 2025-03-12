@@ -14,17 +14,17 @@
             <div class="main-statistic-zone">
                 <div>
                     <p>Somme dépensée cette année</p>
-                    <p class="main-statistic-price">1005.42€</p>
+                    <p class="main-statistic-price">{{user.yearSpend}}€</p>
                 </div>
                 <div>
                     <p>Somme total dépensée ce mois</p>
-                    <p class="main-statistic-price">585.85€</p>
+                    <p class="main-statistic-price">{{user.monthSpend}}€</p>
                 </div>
             </div>
             <div class="secondary-statistic-zone">
                 <div class="secondary-statistic-row">
                     <p>Coût par article :</p>
-                    <p class="secondary-statistic-price">12.85€</p>
+                    <p class="secondary-statistic-price">12.50€</p>
                 </div>
                 <div class="secondary-statistic-row">
                     <p>L'article le plus cher :</p>
@@ -38,7 +38,7 @@
         </div>
         <div class="third-statistic-zone">
             <p>budget mensuel :</p>
-            <p class="secondary-statistic-price">523.55€</p>
+            <p class="secondary-statistic-price">{{user.monthBudget}}€</p>
         </div>
 </div>
 {# Graphique #}
@@ -55,9 +55,7 @@
         <canvas id="radarChart"></canvas>
     </div>
 
-<script src="
-  https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js
-"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     
