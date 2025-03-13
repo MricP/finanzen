@@ -45,43 +45,74 @@
     <div class="graph">
         <h2>Graphique des courses</h2>
     </div>
-
-    <div>
-        <h3>Diagrammes des dépenses par mois</h3>
-        <canvas id="barChart"></canvas>
-    </div>
-    <div>
-        <h3>Diagrammes des achats par catégories</h3>
-        <canvas id="radarChart"></canvas>
+    <div class="graph-container">
+      <div>
+          <h3>Diagrammes des dépenses par mois</h3>
+          <canvas id="barChart"></canvas>
+      </div>
+      <div class="pieChart-container">
+          <h3>Diagramme des achats par catégories</h3>
+          <div class="pieChart-wrapper">
+              <canvas id="pieChart"></canvas>
+          </div>
+      </div>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     
-      var barChart = document.getElementById('barChart');
-      var radarChart = document.getElementById('radarChart');
+    var barChart = document.getElementById('barChart');
 
-        new Chart(barChart, {
-          type: 'bar',
-          data: {
+    var budgetMensuel = {{user.monthBudget}}; 
+    
+    var depenses = [150, 215, 650, 430, 555, 346, 465, 402, 350, 385, 430, 750];
+
+    var couleurs = depenses.map(depense => depense > budgetMensuel ? '#FF6B6C50' : '#04E76250');
+    var bordercolors =  depenses.map(depense => depense > budgetMensuel ? '#FF6B6C' : '#04E762');
+    new Chart(barChart, {
+        type: 'bar',
+        title: "Somme dépensé par mois",
+        data: {
             labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
             datasets: [{
-              label: 'Argent dépensé par mois',
-              data: [150, 215, 650, 430, 555, 346, 465, 402, 350, 385, 430, 750],
-              borderWidth: 1,
-              borderColor: '#242861',
-              backgroundColor: '#24286150',
+                data: depenses,
+                borderWidth: 1,
+                borderColor: bordercolors,
+                backgroundColor: couleurs
             }]
-          },
-          options: {
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true, // Afficher la légende
+                    labels: {
+                        generateLabels: function(chart) {
+                            return [
+                                {
+                                    text: 'Dépenses inférieur au Budget',
+                                    fillStyle: '#04E76250',
+                                    strokeStyle: '#04E762'
+                                },
+                                {
+                                    text: 'Dépenses supérieur au Budget',
+                                    fillStyle: '#FF6B6C50',
+                                    strokeStyle: '#FF6B6C'
+                                }
+                            ];
+                        }
+                    }
+                }
+            },
             scales: {
-              y: {
-                beginAtZero: true
-              }
+                y: {
+                    beginAtZero: true
+                }
             }
-          }
-        });
+          
+        }
+    });
+
       
 
         const data = {
@@ -92,31 +123,39 @@
             'Dessert',
             'Repas préparé',
           ],
-          datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 90, 81, 15],
-            fill: true,
-            backgroundColor: '#24286150',
-            borderColor: '#242861',
-            pointBackgroundColor: '#24286150',
-            pointBorderColor: '#242861',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: '#242861'
-          }]
+           datasets: [{
+        label: 'Dépenses par catégorie',
+        data: [65, 59, 90, 81, 15],
+        fill: true,
+        backgroundColor: [
+            '#FF5733a0', 
+            '#33FF57a0', 
+            '#3357FFa0', 
+            '#FF33A1a0', 
+            '#FFDB33a0' 
+        ],
+            borderColor: '#fff', 
+            borderWidth: 1,
+        }]
         };
 
         const config = {
-          type: 'radar',
-          data: data,
-          options: {
-            elements: {
-              line: {
-                borderWidth: 3
-              }
-            }
-          },
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            },
         };
-        new Chart(radarChart, config);
+        
+        pieChart.style.width = "200px"; 
+        pieChart.style.height = "200px";
+        new Chart(pieChart, config);
   });
 
 
