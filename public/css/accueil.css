@@ -200,6 +200,38 @@ select {
     cursor: pointer;
 }
 
+#list-popup {
+    display: none;
+}
+
+#list-popup.visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+div.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--color-secondary);
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    position: relative;
+    max-width: 90%;
+    width: 400px;
+}
+
+div.container main {
+    min-height: 0;
+}
+
+/*div.container footer, div.container header {*/
+/*    display: none;*/
+/*}*/
 
 @media(max-width: 750px){
     .statistic-zone{

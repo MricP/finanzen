@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{%  block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/add-list.js') }}"></script>
+{% endblock %}
 
 {% block title %}Accueil{% endblock %}
 
@@ -9,6 +13,13 @@
 </style>
 
 <link href="{{ asset('css/accueil.css') }}" rel="stylesheet" type="text/css">
+
+
+<div class="profile-bg" id="list-popup">
+    <div class="container">
+
+    </div>
+</div>
 
 <div class="example-wrapper">
     <div class="statistic">
@@ -91,7 +102,6 @@
             {% endfor %}
         </ul>
 
-        <a href="{{ path('app_liste_new') }}">Créer une nouvelle liste</a>
     </div>
 
 </div>
