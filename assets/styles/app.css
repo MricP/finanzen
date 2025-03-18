@@ -187,8 +187,45 @@ header button {
     background: rgba(255, 255, 255, 0.2);
 }
 
+.btn-profile-user {
+    background-color: #F0F0F0;
+}
+
 .header-column-links.visible {
     display: flex;
+}
+
+.modify-modal-form {
+    flex-direction: column;
+    display: none;
+    gap: .5rem;
+    margin-top: 10px;
+}
+
+.modify-modal-form button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+}
+
+.modify-modal-form.visible {
+    display: flex;
+}
+
+.mobile-copyrights {
+    display: none;
+}
+
+main {
+    height: 100vh;
+}
+
+.modify-modal-form input {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    background-color: var(--gray-color-input);
 }
 
 /* FOOTER */
@@ -300,5 +337,5 @@ footer {
         height: 30px;
         margin-top: 7px;
     }
-    
+
 }

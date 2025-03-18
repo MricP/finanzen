@@ -6,12 +6,14 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class SecurityController extends AbstractController
 {
@@ -48,11 +50,11 @@ class SecurityController extends AbstractController
     #[Route('/set-pseudo', name: 'app_set_pseudo')]
     public function setPseudo(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $user = $this->getUser(); 
+        $user = $this->getUser();
         $fromRegistration = $session->get('from_registration', false);
         $userEmail = $session->get('user_email', '');
 
-        if($user){
+        if ($user) {
             return $this->redirectToRoute('app_home');
         }
 
@@ -111,5 +113,51 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[Route(path: '/get-infos-user', name: 'app_get_infos')]
+    public function get_infos(): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json([
+                'error' => 'User not authenticated'
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        return $this->json([
+            'email' => $user->getUserIdentifier(),
+            'pseudo' => $user->getPseudo(),
+        ]);
+    }
+
+    #[Route(path: '/change-infos-user', name: 'app_change_infos', methods: ['POST'])]
+    public function change_infos(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): JsonResponse
+    {
+        $user = $this->getUser();
+
+        // Vérifier que l'utilisateur implémente PasswordAuthenticatedUserInterface
+        if (!$user instanceof PasswordAuthenticatedUserInterface) {
+            return $this->json(['error' => 'User not authenticated or invalid user'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        if (isset($data['pseudo'])) {
+            $user->setPseudo($data['pseudo']);
+        }
+
+        if (!empty($data['oldPassword']) && !empty($data['newPassword'])) {
+            if (!$passwordHasher->isPasswordValid($user, $data['oldPassword'])) {
+                return $this->json(['error' => 'Ancien mot de passe incorrect'], Response::HTTP_BAD_REQUEST);
+            }
+
+            $user->setPassword($passwordHasher->hashPassword($user, $data['newPassword']));
+        }
+
+        $entityManager->flush();
+
+        return $this->json(['success' => 'Informations mises à jour']);
     }
 }
