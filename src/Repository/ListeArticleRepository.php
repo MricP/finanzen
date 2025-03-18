@@ -16,20 +16,20 @@ class ListeArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, ListeArticle::class);
     }
 
-    //    /**
-    //     * @return ListeArticle[] Returns an array of ListeArticle objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('l')
-    //            ->andWhere('l.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('l.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       /**
+        * @return ListeArticle[] Returns an array of ListeArticle objects
+        */
+       public function findAllMonthList($month): array
+       {
+            return $this->createQueryBuilder('la')
+                ->join('la.liste', 'l')
+                ->join('la.article', 'a')
+                ->andWhere('la.date_creation = :month')
+                ->setParameter('month', $month)
+                ->addSelect('l.nom AS liste_nom, a.prix AS article_prix')
+                ->getQuery()
+                ->getResult();
+       }
 
     //    public function findOneBySomeField($value): ?ListeArticle
     //    {
