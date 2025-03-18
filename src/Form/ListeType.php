@@ -23,6 +23,7 @@ class ListeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Liste::class,
+            'csrf_protection' => false,
         ]);
     }
 }

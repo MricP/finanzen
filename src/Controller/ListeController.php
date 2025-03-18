@@ -33,7 +33,8 @@ final class ListeController extends AbstractController
             $entityManager->persist($liste);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_liste_index', [], Response::HTTP_SEE_OTHER);
+//            return $this->redirectToRoute('app_liste_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('liste/new.html.twig', [

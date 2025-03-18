@@ -200,6 +200,8 @@ select {
     cursor: pointer;
 }
 
+/*Add list popup*/
+
 #list-popup {
     display: none;
 }
@@ -217,7 +219,7 @@ div.container {
     align-items: center;
     flex-direction: column;
     background-color: var(--color-secondary);
-    padding: 2rem;
+    padding: 2rem 2.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 0.5rem;
     position: relative;
@@ -229,9 +231,39 @@ div.container main {
     min-height: 0;
 }
 
-/*div.container footer, div.container header {*/
-/*    display: none;*/
-/*}*/
+div.container h1 {
+    text-align: center;
+    margin-top: 0;
+}
+
+div.container div {
+    display: flex;
+    flex-direction: column;
+}
+
+div.container label {
+    color : var(--color-primary);
+    font-weight: bold;
+}
+
+div.container input {
+    margin-top: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    background-color: var(--gray-color-input);
+}
+
+div.container button {
+    margin-top : 15px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+    font-size: 15px;
+    width: 100%;
+}
 
 @media(max-width: 750px){
     .statistic-zone{

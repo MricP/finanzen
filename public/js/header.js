@@ -30,3 +30,5 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Un ou plusieurs éléments n'ont pas été trouvés dans le DOM.");
     }
 });
+
+
