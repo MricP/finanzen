@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
@@ -10,6 +11,36 @@
 <link href="{{ asset('css/accueil.css') }}" rel="stylesheet" type="text/css">
 
 <div class="example-wrapper">
+    <div class="statistic">
+        <div class="statistic-zone">
+            <div class="main-statistic-zone">
+                <div>
+                    <p>Somme total dépensée</p>
+                    <p class="main-statistic-price">585.85€</p>
+                </div>
+                <a href="/statistic">Voir les statistiques</a>
+            </div>
+            <div class="secondary-statistic-zone">
+                <div class="secondary-statistic-row">
+                    <p>Coût moyen par article :</p>
+                    <p class="secondary-statistic-price">12.85€</p>
+                </div>
+                <div class="secondary-statistic-row">
+                    <p>L'article le plus cher :</p>
+                    <p class="secondary-statistic-price">42.51€</p>
+                </div>
+                <div class="secondary-statistic-row">
+                    <p>L'article le moins cher :</p>
+                    <p class="secondary-statistic-price">1.10€</p>
+                </div>
+            </div>
+        </div>
+        <div class="third-statistic-zone">
+            <p>Votre budget :</p>
+            <p class="secondary-statistic-price">560.85€</p>
+        </div>
+        
+    </div>
     <h1>Listes de courses.</h1>
     <p>Ici, vous pouvez créer, consulter, supprimer vos listes de courses anti-inflation.</p>
 
@@ -63,7 +94,6 @@
         <a href="{{ path('app_liste_new') }}">Créer une nouvelle liste</a>
     </div>
 
-{#    <img src=>#}
 </div>
 
 {% endblock %}

@@ -37,6 +37,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $yearSpend = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $monthSpend = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $monthBudget = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -132,6 +141,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getYearSpend(): ?float
+    {
+        return $this->yearSpend;
+    }
+
+    public function setYearSpend(?float $yearSpend): static
+    {
+        $this->yearSpend = $yearSpend;
+
+        return $this;
+    }
+
+    public function getMonthSpend(): ?float
+    {
+        return $this->monthSpend;
+    }
+
+    public function setMonthSpend(?float $monthSpend): static
+    {
+        $this->monthSpend = $monthSpend;
+
+        return $this;
+    }
+
+    public function getMonthBudget(): ?float
+    {
+        return $this->monthBudget;
+    }
+
+    public function setMonthBudget(?float $monthBudget): static
+    {
+        $this->monthBudget = $monthBudget;
+
+        return $this;
     }
     
 }

@@ -22,6 +22,11 @@ body {
     margin: 0;
 }
 
+main{
+    height: auto;
+    min-height: 100vh;
+}
+
 .logged-body {
     padding-left: 5vw;
     padding-right: 5vw;

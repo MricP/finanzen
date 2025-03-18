@@ -25,9 +25,14 @@ class Liste
     #[ORM\OneToMany(targetEntity: ListeArticle::class, mappedBy: 'listes', orphanRemoval: true)]
     private Collection $listeArticles;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateCreation = null;
+
     public function __construct()
     {
         $this->listeArticles = new ArrayCollection();
+        $this->utilisateurs = new ArrayCollection();
+        $this->dateCreation = new \DateTime();
     }
 
     public function getId(): ?int
@@ -76,4 +81,19 @@ class Liste
 
         return $this;
     }
+
+    
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): static
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
 }

@@ -13,6 +13,7 @@ final class StatisticController extends AbstractController
     {
         return $this->render('statistic/index.html.twig', [
             'controller_name' => 'StatisticController',
+            'user' => $this->getUser()
         ]);
     }
 }
