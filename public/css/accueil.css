@@ -133,8 +133,6 @@ svg.trash {
     text-align: right;
 }
 
-
-
 hr.dotted {
     border-top: 3px dotted #aaa;
     width: 100%;
@@ -144,6 +142,7 @@ hr.dotted {
 li h2 {
     text-align: center;
     font-size: large;
+    word-break: break-word;
 }
 
 .list-item {
@@ -252,6 +251,10 @@ div.container input {
     padding-bottom: 10px;
     border: none;
     background-color: var(--gray-color-input);
+}
+
+#new-list-form {
+    width: 80%;
 }
 
 div.container button {
