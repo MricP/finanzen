@@ -186,6 +186,18 @@ header button {
     display: flex;
 }
 
+.modify-modal-form {
+    flex-direction: column;
+    display: none;
+}
+
+.modify-modal-form.visible {
+    display: flex;
+}
+
+.mobile-copyrights {
+    display: none;
+}
 
 main {
     height: 100vh;
@@ -300,5 +312,5 @@ footer {
         height: 30px;
         margin-top: 7px;
     }
-    
+
 }

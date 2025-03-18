@@ -15,6 +15,10 @@
         </button>
     </nav>
     <nav class="mobile-nav">
+        <button class="btn-profile-user-nav">
+            <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
+                alt="image de profil de l'utilisateur" />
+        </button>
         <button class="menu-burger" aria-label="Menu">
             ☰
         </button>
@@ -22,10 +26,6 @@
             <a href="{{ path('app_home') }}">Mes listes</a>
             <a href="{{ path('app_liste_new') }}">Ajouter une liste</a>
         </div>
-        <button class="btn-profile-user">
-            <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
-                alt="image de profil de l'utilisateur" />
-        </button>
     </nav>
     {% if app.user %}
     <div class="profile-bg" id="profilePopup">
@@ -34,8 +34,14 @@
                 <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
                     alt="image de profil de l'utilisateur" />
                 <p>Hello, {{ app.user.userIdentifier }}</p>
-                <button>Modifier</button>
+                <button id="modify-button">Modifier</button>
                 <a href="{{ path('app_logout') }}">Logout</a>
+                <form class="modify-modal-form">
+                    <input type="text" name="pseudo" id="pseudo-input" placeholder="pseudo">
+                    <input type="password" name="old-password" id="old-password-input" placeholder="ancien mdp">
+                    <input type="password" name="new-password" id="new-password-input" placeholder="nouveau mdp">
+                    <button type="submit">Envoyer</button>
+                </form>
             </div>
             <button class="close-btn">✕</button>
         </div>

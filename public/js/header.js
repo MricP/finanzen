@@ -1,32 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("connection header");
-
-    const openButton = document.querySelector(".btn-profile-user");
+    const openButtons = document.querySelectorAll(".btn-profile-user, .btn-profile-user-nav");
     const closeButton = document.querySelector(".close-btn");
     const profilePopup = document.getElementById("profilePopup");
     const menuBurger = document.querySelector(".menu-burger");
     const headerColumnLinks = document.querySelector(".header-column-links");
+    const buttonModify = document.getElementById("modify-button");
+    const modifyForm = document.querySelector(".modify-modal-form");
     let isOpen = false;
 
-    if (openButton && closeButton && profilePopup && menuBurger) {
-        openButton.addEventListener('click', () => {
-            console.log("vvvved")
+    openButtons.forEach(button => {
+        button.addEventListener('click', () => {
             profilePopup.classList.add("visible");
         });
+    });
 
+    if (closeButton) {
         closeButton.addEventListener('click', () => {
             profilePopup.classList.remove("visible");
         });
+    }
 
+    if (buttonModify) {
+        buttonModify.addEventListener('click', () => {
+            modifyForm.classList.add("visible");
+        });
+    }
+
+    if (menuBurger && headerColumnLinks) {
         menuBurger.addEventListener('click', () => {
             isOpen = !isOpen;
-            if (isOpen) {
-                headerColumnLinks.classList.add("visible");
-            } else {
-                headerColumnLinks.classList.remove("visible");
-            }
+            headerColumnLinks.classList.toggle("visible", isOpen);
         });
     } else {
-        console.error("Un ou plusieurs éléments n'ont pas été trouvés dans le DOM.");
+        console.error("Un ou plusieurs éléments du menu burger sont introuvables.");
     }
 });
