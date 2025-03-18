@@ -37,10 +37,14 @@
                 <button id="modify-button">Modifier</button>
                 <a href="{{ path('app_logout') }}">Logout</a>
                 <form class="modify-modal-form">
-                    <input type="text" name="pseudo" id="pseudo-input" placeholder="pseudo">
-                    <input type="password" name="old-password" id="old-password-input" placeholder="ancien mdp">
-                    <input type="password" name="new-password" id="new-password-input" placeholder="nouveau mdp">
-                    <button type="submit">Envoyer</button>
+                    <p class="error-message">
+                        
+                    </p>
+                    <input type="text" name="pseudo" id="pseudo-input" placeholder="Pseudo">
+                    <input type="email" name="email" id="email-input" placeholder="Email">
+                    <input type="password" name="old-password" id="old-password-input" placeholder="Ancien mot de passe">
+                    <input type="password" name="new-password" id="new-password-input" placeholder="Nouveau mot de passe">
+                    <button type="submit">Valider</button>
                 </form>
             </div>
             <button class="close-btn">✕</button>
