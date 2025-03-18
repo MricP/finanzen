@@ -253,7 +253,7 @@ div.container input {
     background-color: var(--gray-color-input);
 }
 
-#new-list-form {
+div.container form {
     width: 80%;
 }
 
