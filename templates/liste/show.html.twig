@@ -2,11 +2,59 @@
 
 {% block title %}Liste{% endblock %}
 
-{% block body %}
-    <h1>Liste</h1>
-    <p>{{ liste.nom }}</p>
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/list.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
 
-    <div>
+
+{% block body %}
+
+    <div id="container">
+        <div id="list">
+            <h1>Finanzen</h1>
+            <p>{{ liste.nom }}</p>
+            <p>{{ liste.dateCreation|date('d M Y')}}</p>
+
+            <ul id="headers">
+                <li>Nom</li>
+                <li>QTE</li>
+                <li>Prix</li>
+            </ul>
+
+            <div id="list-items">
+                <ul id="items">
+                    {% for item in liste.listeArticles %}
+                        <li id="item">
+                            <p>{{ item.articles.nom }}</p>
+                            <p>{{ item.quantite }}</p>
+                            <p>{{ item.articles.prix }}€</p>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+        </div>
+
+            <hr>
+            <div id="total">
+                <p>Total</p>
+                <p>tqt€</p>
+            </div>
+
+            <hr>
+
+            <div id="details">
+                <p>CARD # : **** **** 2025</p>
+                <p>AUTH CODE : 127181</p>
+                <p>CARDHOLDER : {{ app.user.pseudo }}</p>
+            </div>
+
+            <div id="footer">
+                <p>MERCI DE VOTRE VISITE</p>
+{#                Code barre#}
+                <p>finanzen.com</p> {#adapter l'url#}
+{#                logo#}
+            </div>
 
     </div>
 
