@@ -4,21 +4,13 @@
 
 {% block body %}
     <h1>Liste</h1>
+    <p>{{ liste.nom }}</p>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ liste.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ liste.nom }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
 
-    <a href="{{ path('app_liste_index') }}">back to list</a>
+    </div>
+
+    <a href="{{ path('app_home') }}">back to list</a>
 
     <a href="{{ path('app_liste_edit', {'id': liste.id}) }}">edit</a>
 
