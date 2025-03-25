@@ -15,18 +15,23 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('prix')
-            ->add('nom')
+            ->add('prix', null, [
+                'attr' => ['class' => 'form-control price-input'],
+            ])
+            ->add('nom', null, [
+                'attr' => ['class' => 'form-control name-input'],
+            ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'id',
+                'attr' => ['class' => 'form-control category-select'],
             ])
             ->add('magasins', EntityType::class, [
                 'class' => Magasin::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-            ])
-        ;
+                'attr' => ['class' => 'form-control store-select'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
