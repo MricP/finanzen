@@ -141,4 +141,15 @@ class Article
 
         return $this;
     }
+
+    public function __toString(): string{
+        $categorieNom = $this->getCategorie() ? $this->getCategorie()->getNom() : 'Aucune';
+
+        return sprintf(
+            "%s (%s €) - Catégorie: %s",
+            $this->nom,
+            $this->prix,
+            $categorieNom
+        );
+        }
 }
