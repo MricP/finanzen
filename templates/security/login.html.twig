@@ -5,7 +5,6 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/sign.css') }}?v={{ "now"|date("YmdHis") }}">
 {% endblock %}
 
 {% block body %}
@@ -27,7 +26,9 @@
 					<label for="inputPassword">Mot de passe*</label>
 					<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-					<a class="forgot_pwd_link" href="">Mot de passe oublié ?</a>
+					<a class="forgot_pwd_link" href="">
+						{# Mot de passe oublié ? #}
+					</a>
 					{% if error %}
 						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 					{% endif %}

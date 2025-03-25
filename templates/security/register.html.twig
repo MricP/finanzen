@@ -6,12 +6,11 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/sign.css') }}?v={{ "now"|date("YmdHis") }}">
 {% endblock %}
 
 {% block body %}
 	<div class='register-flex-container'>
-		<div class='flex-1'>
+		<div class='flex-1 register-img-section'>
 			<img src="{{ asset('images/register-img.svg') }}" alt="Register Image">
 		</div>
 		<div class='flex-2'>
