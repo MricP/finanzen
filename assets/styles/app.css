@@ -476,7 +476,7 @@ a:hover{
     border : 1px solid black;
     padding: 10px;
     margin: 15px 15px 15px 0;
-    background-image: url("/assets/images/wrinkled-paper-texture-7.jpg") ;
+    background-image: url("/images/wrinkled-paper-texture-7.jpg") ;
     background-size: 200%;
     /*background-repeat: no-repeat;*/
 }
@@ -1035,7 +1035,60 @@ h2,h3{
     margin-top: 10px;
 }
 
-.return-to-list-link{
+.return-to-list-link, .create-link-crud{
     margin-top: 50px;
     font-size: 0.8rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+    border: 1px solid var(--gray-color-input);
+    padding: 10px;
+    text-align: left;
+}
+
+.table th {
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: var(--background-color);
+}
+
+.table tbody tr:hover {
+    background-color: var(--gray-color-input);
+}
+
+.table a {
+    color: var(--color-primary);
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.table a:hover {
+    text-decoration: underline;
+}
+
+.no-records {
+    text-align: center;
+    padding: 20px;
+    color: var(--error-color);
+}
+
+.actions-td>a{
+    display: flex;
+    align-items: center;
+}
+
+.edit-img-crud, .see-img-crud{
+    width: 20px;    
+    width: 20px;    
+    margin-left: 5px;
 }
