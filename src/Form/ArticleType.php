@@ -25,13 +25,8 @@ class ArticleType extends AbstractType
                 'class' => Categorie::class,
                 'choice_label' => 'id',
                 'attr' => ['class' => 'form-control category-select'],
-            ])
-            ->add('magasins', EntityType::class, [
-                'class' => Magasin::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-                'attr' => ['class' => 'form-control store-select'],
             ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void
