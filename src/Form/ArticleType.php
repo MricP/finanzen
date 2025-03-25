@@ -25,8 +25,7 @@ class ArticleType extends AbstractType
                 'class' => Categorie::class,
                 'choice_label' => 'id',
                 'attr' => ['class' => 'form-control category-select'],
-            ]);
-            
+            ]);       
     }
 
     public function configureOptions(OptionsResolver $resolver): void
