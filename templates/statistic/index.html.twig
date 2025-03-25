@@ -66,7 +66,7 @@
 
     var budgetMensuel = {{user.monthBudget}}; 
     
-    var depenses = [150, 215, 650, 430, 555, 346, 465, 402, 350, 385, 430, 750];
+    var depenses = {{ depenses|raw }}; ;
 
     var couleurs = depenses.map(depense => depense > budgetMensuel ? '#FF6B6C50' : '#04E76250');
     var bordercolors =  depenses.map(depense => depense > budgetMensuel ? '#FF6B6C' : '#04E762');
@@ -85,7 +85,7 @@
         options: {
             plugins: {
                 legend: {
-                    display: true, // Afficher la légende
+                    display: true,
                     labels: {
                         generateLabels: function(chart) {
                             return [
@@ -113,54 +113,53 @@
         }
     });
 
-      
+    const donnéesCategorie = {{depenseParCategorie|raw}};
 
-        const data = {
-          labels: [
-            'Nouriture',
-            'Boisson',
-            'Produit ménager',
-            'Dessert',
-            'Repas préparé',
-          ],
-           datasets: [{
-        label: 'Dépenses par catégorie',
-        data: [65, 59, 90, 81, 15],
-        fill: true,
-        backgroundColor: [
-            '#FF5733a0', 
-            '#33FF57a0', 
-            '#3357FFa0', 
-            '#FF33A1a0', 
-            '#FFDB33a0' 
-        ],
-            borderColor: '#fff', 
+    function getColorForCategory(categoryName) {
+        const categoryColors = {
+            'Alimentation': '#FF5733a0', 
+            'Hygiène': '#FF33A1a0', 
+            'Maison': '#3357FFa0', 
+            'Loisirs': '#33FF57a0',
+            'Divers': '#FFDB33a0',
+            'Transport': '#D9CFC1a0', 
+            'Vêtements': '#A77E58a0', 
+            'Santé': '#EEE3ABa0', 
+            'Autres': '#EEC0C6a0',
+        };
+
+        return categoryColors[categoryName] || '#808080a0'; 
+    }
+
+    const data = {
+        labels: Object.keys(donnéesCategorie),
+        datasets: [{
+            label: '€',
+            data: Object.values(donnéesCategorie),
+            fill: true,
+            backgroundColor: Object.keys(donnéesCategorie).map(category => getColorForCategory(category)),
+            borderColor: '#fff',
             borderWidth: 1,
         }]
-        };
+    };
 
-        const config = {
-            type: 'pie',
-            data: data,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    line: {
-                        borderWidth: 3
-                    }
+    const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            elements: {
+                line: {
+                    borderWidth: 3
                 }
-            },
-        };
-        
-        pieChart.style.width = "200px"; 
-        pieChart.style.height = "200px";
-        new Chart(pieChart, config);
-  });
-
-
-  
-  
+            }
+        },
+    };
+    pieChart.style.width = "200px"; 
+    pieChart.style.height = "200px";
+    new Chart(pieChart, config);
+  }); 
 </script>
 {% endblock %}
 
