@@ -79,12 +79,9 @@
                     <hr class="dotted">
                     <div class="list-items">
                         <ul>
-                            {% for item in liste.listeArticles %}
-                                <li class="list-item">{{ item.nom }}</li>
+                            {% for item in liste.listeArticles|slice(0,3) %}
+                                <li>{{ item.articles.nom }}</li>
                             {% endfor %}
-                            <li>truc</li>
-                            <li>truc2</li>
-                            <li>truc 3</li>
                         </ul>
                     </div>
 
