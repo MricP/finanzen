@@ -77,7 +77,7 @@ final class ListeController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_liste_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 
 }
