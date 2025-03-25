@@ -7,6 +7,7 @@ use App\Form\ListeArticleType;
 use App\Repository\ListeArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -77,5 +78,22 @@ final class ListeArticleController extends AbstractController
         }
 
         return $this->redirectToRoute('app_liste_article_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/update-quantity/{id}', name: 'app_liste_article_update_quantity', methods: ['POST'])]
+    public function updateQuantity(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): JsonResponse
+    {
+        if ($request->isXmlHttpRequest()) {
+            $data = json_decode($request->getContent(), true);
+            $newQuantity = $data['quantity'];
+
+            $listeArticle->setQuantite($newQuantity);
+            $entityManager->flush();
+
+            return new JsonResponse(['status' => 'Quantity updated'], 200);
+        }
+
+        return new JsonResponse(['status' => 'Invalid request'], 400);
     }
 }
