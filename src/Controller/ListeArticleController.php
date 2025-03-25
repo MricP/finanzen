@@ -59,10 +59,10 @@ final class ListeArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_liste_article_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('liste_article/edit.html.twig', [
+        return $this->render('liste_article/_form_edit.html.twig', [
             'liste_article' => $listeArticle,
             'form' => $form,
         ]);

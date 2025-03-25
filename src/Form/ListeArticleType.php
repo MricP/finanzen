@@ -17,14 +17,14 @@ class ListeArticleType extends AbstractType
         $builder
             ->add('est_achete')
             ->add('quantite')
-            ->add('articles', EntityType::class, [
-                'class' => Article::class,
-                'choice_label' => 'id',
-            ])
-            ->add('listes', EntityType::class, [
-                'class' => Liste::class,
-                'choice_label' => 'id',
-            ])
+//            ->add('articles', EntityType::class, [
+//                'class' => Article::class,
+//                'choice_label' => 'id',
+//            ])
+//            ->add('listes', EntityType::class, [
+//                'class' => Liste::class,
+//                'choice_label' => 'id',
+//            ])
         ;
     }
 
