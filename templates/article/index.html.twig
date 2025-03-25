@@ -8,13 +8,14 @@
 </style>
 <div class="example-wrapper">
     <h1>Article index</h1>
-
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Prix</th>
                 <th>Nom</th>
+                {# <th>Catégorie</th>
+                <th>Magasin</th> #}
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,6 +25,8 @@
                 <td>{{ article.id }}</td>
                 <td>{{ article.prix }}</td>
                 <td>{{ article.nom }}</td>
+                {# <td>{{ article.categorie.name }}</td>
+                <td>{{ article.magasin.name }}</td> #}
                 <td>
                     <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>

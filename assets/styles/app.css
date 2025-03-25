@@ -998,8 +998,8 @@ h2,h3{
 
 
 
-/***************************LISTE CRUD***************************/ 
-.new-article-form{
+/***************************CRUD***************************/ 
+.new-article-form, .delete-article-form, .new-categorie-form, .new-magasin-form{
     flex-direction: column ;
     display: flex;
     justify-content: center;
@@ -1009,9 +1009,10 @@ h2,h3{
     flex-direction: column ;
     display: flex;
     justify-content: center;
+    margin-bottom: 5px;
 }
 
-.price-input {
+.price-input, .categorie-name-input, .name-input, .magasin-name-input {
     padding-top: 10px;
     padding-bottom: 10px;
     border: none;
@@ -1019,18 +1020,22 @@ h2,h3{
     width: 100%;
 }
 
-.name-input {
+.category-select, .select-magasin, .store-select {
+    background-color: var(--gray-color-input);
     padding-top: 10px;
     padding-bottom: 10px;
-    border: none;
-    background-color: var(--gray-color-input);
-    width: 100%;
 }
 
-.category-select {
+.new-article-form button, .delete-article-form button, .new-categorie-form button, .new-magasin-form button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
-.store-select {
+.return-to-list-link{
+    margin-top: 50px;
+    font-size: 0.8rem;
 }
-
-y

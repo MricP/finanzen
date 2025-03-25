@@ -14,13 +14,9 @@ class MagasinType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('articles', EntityType::class, [
-                'class' => Article::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-        ;
+            ->add('nom', null, [
+                'attr' => ['class' => 'form-control magasin-name-input'],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

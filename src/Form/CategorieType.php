@@ -12,7 +12,9 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
+            ->add('nom', null, [
+                'attr' => ['class' => 'form-control categorie-name-input'],
+            ])
         ;
     }
 
