@@ -1,3 +1,183 @@
 body {
     background-color: var(--color-secondary);
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    background-color: #F3F3F3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width : 80%;
+    min-height: 80vh;
+    padding: 10px 5px;
+}
+
+#list {
+    padding: 20px 20px 30px;
+    margin : 50px;
+    background-image: url("/images/wrinkled-paper-texture-7.jpg") ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45vh ;
+}
+
+#list h1 {
+    margin-bottom: 0;
+}
+
+#list h1+p, #list h1+p+p {
+    margin: 5px;
+}
+
+
+
+#headers {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    font-weight: bold;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0;
+}
+
+#list-items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#items {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*#items input:first-child {*/
+/*    width: 80%;*/
+/*    cursor: text;*/
+/*}*/
+
+#items input {
+    width: 20%;
+    border: none;
+    color: var(--text-color-primary);
+    background-color: transparent;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    padding: 2px 5px;
+    position: relative;
+}
+
+hr {
+    width: 100%;
+    border: 1px solid black;
+}
+
+#details {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+    margin: 30px 0;
+}
+
+#details p {
+    margin: 0;
+    padding: 0;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#total {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.item .trash {
+    cursor: pointer;
+    height: 3vh ;
+    display: none;
+}
+
+
+
+.item:hover .trash {
+    display: block;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#footer p {
+    margin: 0;
+    padding: 0;
+}
+
+#barcode {
+    width: 65%;
+}
+
+#links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#links a {
+    text-decoration: none;
+    color: var(--text-color-primary);
+    font-size: 16px;
+    padding: 2px 5px;
+}
+
+#container button {
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-family: "Inter", Arial, sans-serif;
+}
+
+.item-bought {
+    text-decoration: line-through;
+}

@@ -1,0 +1,4 @@
+{{ form_start(form, {'attr': {'class': 'new-magasin-form'}}, {action: path("app_magasin_new")}) }}
+    {{ form_widget(form) }}
+<button class="btn">{{ button_label|default("Ajouter le magasin") }}</button>
+{{ form_end(form) }}

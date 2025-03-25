@@ -3,6 +3,10 @@
 {% block title %}Magasin index{% endblock %}
 
 {% block body %}
+<style>
+    .example-wrapper { background-color: #F3F3F3; border: 2px solid rgba(36, 40, 97, .2) ; padding: 25px; margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+</style>
+<div class="example-wrapper">
     <h1>Magasin index</h1>
 
     <table class="table">
@@ -18,18 +22,24 @@
             <tr>
                 <td>{{ magasin.id }}</td>
                 <td>{{ magasin.nom }}</td>
-                <td>
-                    <a href="{{ path('app_magasin_show', {'id': magasin.id}) }}">show</a>
-                    <a href="{{ path('app_magasin_edit', {'id': magasin.id}) }}">edit</a>
+                <td class="actions-td">
+                    <a href="{{ path('app_magasin_show', {'id': magasin.id}) }}">
+                    <span>Voir</span>
+                    <img class="see-img-crud" src="{{ asset('images/eye-icon.jpg') }}" alt="eye icon oeil icon">
+                    </a>
+                    <a  class="edit-img-crud" href="{{ path('app_magasin_edit', {'id': magasin.id}) }}">
+                    <span>Modifier</span>
+                    </a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Il n'y a aucun enregistrement.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_magasin_new') }}">Create new</a>
+    <a class="create-link-crud" href="{{ path('app_magasin_new') }}">Creer un nouveau magasin</a>
+</div>
 {% endblock %}
