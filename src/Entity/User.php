@@ -46,6 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?float $monthBudget = null;
 
+    #[ORM\Column]
+    private ?bool $isAdmin = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -175,6 +178,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMonthBudget(?float $monthBudget): static
     {
         $this->monthBudget = $monthBudget;
+
+        return $this;
+    }
+
+    public function isAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): static
+    {
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }

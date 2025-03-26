@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/magasin')]
+#[Route('/admin-x7y2z9w4/magasin')]
 final class MagasinController extends AbstractController
 {
     #[Route(name: 'app_magasin_index', methods: ['GET'])]

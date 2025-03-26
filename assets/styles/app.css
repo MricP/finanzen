@@ -78,10 +78,15 @@ header button {
     border: none;
 }
 
-.add-list-link {
+.add-list-link{
     color: var(--color-secondary);
     background-color: var(--color-primary);
     padding: 10px;
+}
+
+.delete-button-admin {
+    color: var(--error-color);
+    font-weight: bold;
 }
 
 .profile-bg {
@@ -120,6 +125,17 @@ header button {
 
 .profile-infos {
     text-align: center;
+}
+
+.flex-profile-email-admin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border : 1px dashed var(--color-primary);
 }
 
 .profile-infos p {
@@ -357,7 +373,7 @@ footer {
 
 
 
-
+/*page politiques, cookies popup, admin, url /admin dans crud categories et liste articles*/
 
 
 
@@ -556,7 +572,7 @@ svg.arrow {
 
 }
 
-select {
+/* select {
     height: 5vh;
     appearance: none;
     width: 100%;
@@ -567,7 +583,7 @@ select {
     border-radius: 0.25rem;
     color: #000;
     cursor: pointer;
-}
+} */
 
 /*Add list popup*/
 
@@ -732,13 +748,19 @@ div.container button {
 }
 
 .infos-login,
-.infos-register,
 .infos-pseudo {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+}
+
+.infos-register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .pseudo-infos-text {
@@ -749,10 +771,16 @@ div.container button {
 }
 
 .infos-login>img,
-.infos-register>img .infos-pseudo>img {
+ .infos-pseudo>img {
     width: 50%;
     height: 50%;
 }
+.infos-register>img{
+    margin-top: 20px;
+    width: 50%;
+    height: 50%;
+}
+
 
 
 .infos-login a,
@@ -998,8 +1026,32 @@ h2,h3{
 
 
 
-/***************************CRUD***************************/ 
-.new-article-form, .delete-article-form, .new-categorie-form, .new-magasin-form{
+/***************************CRUD Admin***************************/ 
+.title-admin{
+    display: flex;
+    gap: 0.5rem;
+}
+.title-admin-show{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.title-admin-icon{
+    width: 45px;
+    height: 45px;
+}
+
+.admin-links{
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-links a{
+    color : var(--color-primary);
+}
+
+.new-article-form, .modify-article-form,.modify-magasin-form, .modify-categorie-form, .delete-article-form, .new-categorie-form, .new-magasin-form{
     flex-direction: column ;
     display: flex;
     justify-content: center;
@@ -1022,11 +1074,9 @@ h2,h3{
 
 .category-select, .select-magasin, .store-select {
     background-color: var(--gray-color-input);
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
-.new-article-form button, .delete-article-form button, .new-categorie-form button, .new-magasin-form button{
+.new-article-form button, .modify-article-form button,.modify-magasin-form button, .modify-categorie-form button, .delete-article-form button, .new-categorie-form button, .new-magasin-form button{
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: var(--color-primary);
@@ -1035,8 +1085,7 @@ h2,h3{
     margin-top: 10px;
 }
 
-.return-to-list-link, .create-link-crud{
-    margin-top: 50px;
+.return-to-list-link, .create-link-crud, .edit-link-crud{
     font-size: 0.8rem;
 }
 
@@ -1091,4 +1140,8 @@ h2,h3{
     width: 20px;    
     width: 20px;    
     margin-left: 5px;
+}
+
+.create-link-crud:hover {
+    text-decoration: underline;
 }
