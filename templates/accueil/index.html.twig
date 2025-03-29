@@ -11,15 +11,12 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
 </style>
-
-
-
     <div class="profile-bg" id="list-popup">
-        <div class="container">
+        <div class="liste-add-container">
 
         </div>
+        <span class="close-add-list">Fermer la popup</span>
     </div>
-
 <div class="example-wrapper">
     <div class="statistic">
         <div class="statistic-zone">
@@ -28,7 +25,7 @@
                     <p>Somme total dépensée</p>
                     <p class="main-statistic-price">{{user.monthSpend}} €</p>
                 </div>
-                <a href="/statistic">Voir les statistiques</a>
+                <a href="{{ path('app_statistic') }}">Voir les statistiques</a>
             </div>
             <div class="secondary-statistic-zone">
                 <div class="secondary-statistic-row">
@@ -97,8 +94,6 @@
 
             {% endfor %}
         </ul>
-
-{#        <a href={{ path("app_liste_new")}} >Ajouter une liste</a>#}
     </div>
 
 </div>

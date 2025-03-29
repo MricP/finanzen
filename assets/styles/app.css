@@ -84,6 +84,12 @@ header button {
     padding: 10px;
 }
 
+.add-list-link:hover{
+    text-decoration: none;
+    background-color: var(--text-color-primary);
+    color: var(--color-secondary);
+}
+
 .delete-button-admin {
     color: var(--error-color);
     font-weight: bold;
@@ -444,6 +450,16 @@ a:hover{
 
 .main-statistic-zone > a{
     text-align: center;
+    background-color: #242861;
+    padding: 5px;
+    color: #FFFFFF;
+    width: 75%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+.main-statistic-zone > a:hover{
+    background-color: var(--text-color-primary);
 }
 
 .main-statistic-price{
@@ -598,7 +614,7 @@ svg.arrow {
     height: 100vh;
 }
 
-div.container {
+div.liste-add-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -612,26 +628,26 @@ div.container {
     width: 400px;
 }
 
-div.container main {
+div.liste-add-container main {
     min-height: 0;
 }
 
-div.container h1 {
+div.liste-add-container h1 {
     text-align: center;
     margin-top: 0;
 }
 
-div.container div {
+div.liste-add-container div {
     display: flex;
     flex-direction: column;
 }
 
-div.container label {
+div.liste-add-container label {
     color : var(--color-primary);
     font-weight: bold;
 }
 
-div.container input {
+div.liste-add-container input {
     margin-top: 8px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -639,19 +655,34 @@ div.container input {
     background-color: var(--gray-color-input);
 }
 
-div.container form {
+div.liste-add-container form {
     width: 80%;
 }
 
-div.container button {
-    margin-top : 15px;
+.close-add-list{
+    color: var(--error-color);
+    margin-top: 5px;
     font-weight: bold;
+}
+
+.close-add-list:hover{
+    text-decoration: underline;
+}
+
+.liste-add-button  {
+    margin-top : 15px;
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: var(--color-primary);
     color: var(--text-color-secondary);
     font-size: 15px;
     width: 100%;
+}
+
+.liste-add-button:hover {
+    text-decoration: none;
+    background-color: black;
+    color: var(--color-secondary);
 }
 
 @media(max-width: 750px){
