@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonModify = document.getElementById("modify-button");
     const modifyForm = document.querySelector(".modify-modal-form");
     const errorMessage = document.querySelector(".error-message");
+    const profileImageInside = document.querySelector(".default-user-icon-inside");
+    const profileImageButtons = document.querySelectorAll(".btn-profile-user img, .btn-profile-user-nav img");
+    const fileInput = document.getElementById("profile-picture-input");
     let isOpen = false;
     let isFormOpen = false;
 
@@ -19,6 +22,51 @@ document.addEventListener("DOMContentLoaded", () => {
     if (closeButton) {
         closeButton.addEventListener('click', () => {
             profilePopup.classList.remove("visible");
+        });
+    }
+
+    if (fileInput && profileImageInside) {
+        fileInput.addEventListener("change", async (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const newImageSrc = e.target.result;
+                    profileImageInside.src = newImageSrc;
+                    profileImageInside.classList.add("default-user-icon-inside");
+                    profileImageButtons.forEach(img => {
+                        img.src = newImageSrc;
+                        img.classList.add("default-user-icon");
+                    });
+                };
+                reader.readAsDataURL(file);
+
+                const formData = new FormData();
+                formData.append("profile-picture", file);
+
+                try {
+                    const response = await fetch("/upload-profile-picture", {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(result.error || "Erreur lors du téléversement");
+                    }
+                } catch (error) {
+                    console.error("Erreur :", error);
+                    errorMessage.textContent = error.message;
+                }
+            }
+        });
+    }
+
+    if (menuBurger && headerColumnLinks) {
+        menuBurger.addEventListener('click', () => {
+            isOpen = !isOpen;
+            headerColumnLinks.classList.toggle("visible", isOpen);
         });
     }
 
@@ -39,19 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.getElementById("email-input").value = data.email || "";
                 } catch (error) {
                     console.error("Erreur :", error);
-                    errorMessage.textContent = error;
+                    errorMessage.textContent = error.message;
                 }
             } else {
                 modifyForm.classList.remove("visible");
                 isFormOpen = false;
             }
-        });
-    }
-
-    if (menuBurger && headerColumnLinks) {
-        menuBurger.addEventListener('click', () => {
-            isOpen = !isOpen;
-            headerColumnLinks.classList.toggle("visible", isOpen);
         });
     }
 
@@ -69,9 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 const response = await fetch("/change-infos-user", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
                 });
 
@@ -86,10 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 isFormOpen = false;
             } catch (error) {
                 console.error("Erreur :", error);
-                errorMessage.textContent = error;
+                errorMessage.textContent = error.message;
             }
         });
     }
 });
-
-

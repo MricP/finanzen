@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isAdmin = null;
 
+    #[ORM\Column(length: 100)]
+    private ?string $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -190,6 +193,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsAdmin(bool $isAdmin): static
     {
         $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

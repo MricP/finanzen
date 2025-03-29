@@ -10,14 +10,20 @@
         <a href="{{ path('app_home') }}">Mes listes</a>
         <a class="add-list-link" href="{#{{ path('app_liste_new') }}#}">Ajouter une liste</a>
         <button class="btn-profile-user">
-            <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
-                alt="image de profil de l'utilisateur" />
+            {% if app.user %}
+                <img src="{{ app.user.image ? asset('images/user-profile/' ~ app.user.image) : asset('images/user-profile/default-user-icon.svg') }}" 
+                    alt="image de profil de l'utilisateur" 
+                    class="default-user-icon" />
+            {% endif %}
         </button>
     </nav>
     <nav class="mobile-nav">
         <button class="btn-profile-user-nav">
-            <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
-                alt="image de profil de l'utilisateur" />
+             {% if app.user %}
+                <img src="{{ app.user.image ? asset('images/user-profile/' ~ app.user.image) : asset('images/default-user-icon.svg') }}" 
+                    alt="image de profil de l'utilisateur" 
+                    class="default-user-icon" />
+            {% endif %}
         </button>
         <button class="menu-burger" aria-label="Menu">
             ☰
@@ -31,12 +37,16 @@
     <div class="profile-bg" id="profilePopup">
         <div class="profile-container">
             <div class="profile-infos">
-                <img src="{{ asset('images/default-user-icon.svg') }}" class="default-user-icon"
-                    alt="image de profil de l'utilisateur" />
+                {% if app.user %}
+                    <img src="{{ app.user.image ? asset('images/user-profile/' ~ app.user.image) : asset('images/user-profile/default-user-icon.svg') }}" 
+                        alt="image de profil de l'utilisateur" 
+                        class="default-user-icon-inside" />
+                    {% endif %}
+                  <input type="file" name="profile-picture" id="profile-picture-input" accept="image/*">
                 <div class="flex-profile-email-admin"
                 <p>Hello, {{ app.user.userIdentifier }}</p>
                     {% if app.user.isAdmin %}
-                    <a href="{{ path('app_admin') }}">Admin</a>
+                    <a class="admin-button" href="{{ path('app_admin') }}">Admin</a>
                     {% endif %}
                 </div>
                 <button id="modify-button">Modifier</button>

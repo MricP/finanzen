@@ -69,10 +69,15 @@ nav a:hover {
 }
 
 .logo-finanzen,
-.default-user-icon {
+.default-user-icon
+.default-user-icon-inside {
+    margin-top: 5px;
     width: 60px;
     height: 60px;
+    border-radius: 100px;
+    border: none;
 }
+
 
 header button {
     border: none;
@@ -130,18 +135,30 @@ header button {
 }
 
 .profile-infos {
+    border : 1px dashed var(--color-primary);
+    border-radius: 5px;
     text-align: center;
+    padding: 5px 20px;
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.profile-infos img, .btn-profile-user img{
+    border: 1px solid black;
+    width: 60px;
+    background-color: var(--background-color);
+    height: 60px;
+    border-radius: 100%;
 }
 
 .flex-profile-email-admin{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
-    border-radius: 5px;
     margin-top: 10px;
-    margin-bottom: 10px;
-    border : 1px dashed var(--color-primary);
 }
 
 .profile-infos p {
@@ -149,14 +166,18 @@ header button {
     font-size: 1.125rem;
 }
 
-.profile-infos a {
-    color: #ff4d4f;
+.admin-button {
+    color: var(--background-color);
+    background-color: var(--error-color);
     text-decoration: none;
     font-weight: 500;
+    padding: 5px 20px;
+    margin-bottom: 5px;
 }
 
-.profile-infos a:hover {
-    text-decoration: underline;
+.admin-button:hover {
+    color: var(--text-color-secondary);
+    background-color: var(--text-color-primary);
 }
 
 .close-btn {
@@ -209,10 +230,6 @@ header button {
 
 .header-column-links a:hover {
     background: rgba(255, 255, 255, 0.2);
-}
-
-.btn-profile-user {
-    background-color: #F0F0F0;
 }
 
 .header-column-links.visible {
@@ -352,7 +369,7 @@ footer {
         padding: 10px;
     }
 
-    .default-user-icon {
+    .default-user-icon, .default-user-icon-inside {
         width: 30px;
         height: 30px;
         margin-top: 7px;
@@ -504,7 +521,6 @@ a:hover{
     flex-direction: column;
     justify-content: space-between;
     width: 26%;
-    height: 35vh;
     border : 1px solid black;
     padding: 10px;
     margin: 15px 15px 15px 0;
@@ -568,7 +584,14 @@ li h2 {
     text-decoration: none;
     color: black;
     text-align: center;
+}
 
+.list-footer a:hover{
+    text-decoration: underline;
+}
+
+.btn-delete-specific{
+    background-color: var(--error-color);
 }
 
 svg.arrow {
@@ -662,10 +685,10 @@ div.liste-add-container form {
 .close-add-list{
     color: var(--error-color);
     margin-top: 5px;
-    font-weight: bold;
 }
 
 .close-add-list:hover{
+    font-weight: bold;
     text-decoration: underline;
 }
 
@@ -1212,4 +1235,179 @@ div.liste-add-container form {
 
 .create-link-crud:hover {
     text-decoration: underline;
+}
+
+
+
+#specific-list-container {
+    background-color: #F3F3F3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width : 80%;
+    min-height: 80vh;
+    padding: 10px 5px;
+}
+
+#list {
+    padding: 20px 20px 30px;
+    margin : 50px;
+    background-image: url("/images/wrinkled-paper-texture-7.jpg") ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45vh ;
+}
+
+#list h1 {
+    margin-bottom: 0;
+}
+
+#list h1+p, #list h1+p+p {
+    margin: 5px;
+}
+
+
+
+#headers {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    font-weight: bold;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0;
+}
+
+#list-items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#items {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*#items input:first-child {*/
+/*    width: 80%;*/
+/*    cursor: text;*/
+/*}*/
+
+#items input {
+    width: 20%;
+    border: none;
+    color: var(--text-color-primary);
+    background-color: transparent;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    padding: 2px 5px;
+    position: relative;
+}
+
+hr {
+    width: 100%;
+    border: 1px solid black;
+}
+
+#details {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+    margin: 30px 0;
+}
+
+#details p {
+    margin: 0;
+    padding: 0;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#total {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.item .trash {
+    cursor: pointer;
+    height: 3vh ;
+    display: none;
+}
+
+
+
+.item:hover .trash {
+    display: block;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#footer p {
+    margin: 0;
+    padding: 0;
+}
+
+#barcode {
+    width: 65%;
+}
+
+#links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#links a {
+    text-decoration: none;
+    color: var(--text-color-primary);
+    font-size: 16px;
+    padding: 2px 5px;
+}
+
+#container button {
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-family: "Inter", Arial, sans-serif;
+}
+
+.item-bought {
+    text-decoration: line-through;
 }
