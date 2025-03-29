@@ -1027,6 +1027,10 @@ h2,h3{
 
 
 /***************************CRUD Admin***************************/ 
+.admin-index-icon{
+    width: 200px;
+    height: auto;
+}
 .title-admin{
     display: flex;
     gap: 0.5rem;
