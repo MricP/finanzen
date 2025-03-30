@@ -476,7 +476,7 @@ a:hover{
     border : 1px solid black;
     padding: 10px;
     margin: 15px 15px 15px 0;
-    background-image: url("/assets/images/wrinkled-paper-texture-7.jpg") ;
+    background-image: url("/images/wrinkled-paper-texture-7.jpg") ;
     background-size: 200%;
     /*background-repeat: no-repeat;*/
 }
