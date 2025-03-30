@@ -22,6 +22,7 @@ final class ListeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $liste->setUser($this->getUser());
             $entityManager->persist($liste);
             $entityManager->flush();
 

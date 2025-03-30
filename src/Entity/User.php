@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -51,6 +53,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 100)]
     private ?string $image = null;
+
+    /**
+     * @var Collection<int, Liste>
+     */
+    #[ORM\OneToMany(targetEntity: Liste::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $listes;
+
+    public function __construct()
+    {
+        $this->listes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -205,6 +218,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Liste>
+     */
+    public function getListes(): Collection
+    {
+        return $this->listes;
+    }
+
+    public function addListe(Liste $liste): static
+    {
+        if (!$this->listes->contains($liste)) {
+            $this->listes->add($liste);
+            $liste->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListe(Liste $liste): static
+    {
+        if ($this->listes->removeElement($liste)) {
+            // set the owning side to null (unless already changed)
+            if ($liste->getUser() === $this) {
+                $liste->setUser(null);
+            }
+        }
 
         return $this;
     }

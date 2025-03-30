@@ -66,6 +66,7 @@
     <div>
         <ul class="listes">
             {% for liste in listes %}
+                {% if liste.getUser() == app.user %}
                 <li class="liste">
                     <div class="list-header">
                         <a href="{{ path('app_liste_show', {'id': liste.id}) }}">
@@ -94,7 +95,7 @@
                 </li>
             {% else %}
                 <li>Aucune liste de courses n'a été trouvée.</li>
-
+            {% endif%}
             {% endfor %}
         </ul>
     </div>
