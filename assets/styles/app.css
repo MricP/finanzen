@@ -516,6 +516,22 @@ a:hover{
     gap: 10px;
 }
 
+.secondary-statistic-price-input{
+    color: var(--color-primary);
+    font-size: 1.75em;
+    font-weight: 600;
+    width: 15%;
+    background-color: var(--background-color);
+    outline: none;
+    border: none;
+}
+
+.secondary-statistic-price-input:focus{
+    outline: initial;
+    border: 1px solid var(--color-primary);;
+}
+
+
 .liste {
     display: flex;
     flex-direction: column;

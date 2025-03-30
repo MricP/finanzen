@@ -3,6 +3,7 @@
 {%  block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/add-list.js') }}"></script>
+    <script src="{{asset('js/edit-budget.js')}}"></script>
 {% endblock %}
 
 {% block title %}Accueil{% endblock %}
@@ -47,7 +48,8 @@
         </div>
         <div class="third-statistic-zone">
             <p>Votre budget :</p>
-            <p class="secondary-statistic-price">{{user.monthBudget}} €</p>
+            <input class="secondary-statistic-price-input" value={{user.monthBudget}} />
+            <p class="secondary-statistic-price">€</p>
         </div>
         
     </div>
