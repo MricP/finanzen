@@ -412,7 +412,7 @@ footer {
 
 /******************************ACCUEIL******************************/
 h1 {
-    color: #242861;
+    color: var(--color-primary);
 }
 
 p {
@@ -434,7 +434,7 @@ a{
 }
 
 a:hover{
-    color: #242861;
+    color: var(--color-primary);
 }
 
 .statistic-zone{
@@ -443,7 +443,7 @@ a:hover{
 }
 
 .statistic{
-     border: 3px dashed #242861;
+     border: 3px dashed var(--color-primary);
      padding: 10px;
 }
 
@@ -467,7 +467,7 @@ a:hover{
 
 .main-statistic-zone > a{
     text-align: center;
-    background-color: #242861;
+    background-color: var(--color-primary);
     padding: 5px;
     color: #FFFFFF;
     width: 75%;
@@ -480,7 +480,7 @@ a:hover{
 }
 
 .main-statistic-price{
-    color: #242861;
+    color: var(--color-primary);
     font-size: 2em;
     font-weight: 600;
 }
@@ -495,7 +495,7 @@ a:hover{
 }
 
 .secondary-statistic-price{
-    color: #242861;
+    color: var(--color-primary);
     font-size: 1.75em;
     font-weight: 600;
 }
@@ -541,9 +541,11 @@ svg.trash {
 }
 
 .list-header {
+    height: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 0;
 }
 
 .list-header p {
@@ -554,7 +556,6 @@ svg.trash {
 hr.dotted {
     border-top: 3px dotted #aaa;
     width: 100%;
-    margin: 0;
 }
 
 li h2 {
@@ -568,6 +569,7 @@ li h2 {
 }
 .list-items {
     padding: 10px;
+    min-height: 15vh;
 }
 
 .list-footer {
@@ -591,12 +593,31 @@ li h2 {
 }
 
 .btn-delete-specific{
-    background-color: var(--error-color);
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+    padding: 10px;
 }
 
 svg.arrow {
     height: 3vh;
 }
+
+#specific-list-links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#specific-list-links a {
+    width: 200px;
+}
+
+#specific-list-links a:last-child{
+    text-align: right;
+}
+
 
 #filtre svg {
     height: 3vh;
@@ -956,7 +977,7 @@ div.liste-add-container form {
 
 /******************************STATISTIQUES******************************/
 .statistic{
-    border: 3px dashed #242861;
+    border: 3px dashed var(--color-primary);
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -990,7 +1011,7 @@ div.liste-add-container form {
 }
 
 .main-statistic-price{
-   color: #242861;
+   color: var(--color-primary);
    font-size: 2em;
    font-weight: 600;
 }
@@ -1005,7 +1026,7 @@ div.liste-add-container form {
 }
 
 .secondary-statistic-price{
-   color: #242861;
+   color: var(--color-primary);
    font-size: 1.75em;
    font-weight: 600;
 }
@@ -1062,7 +1083,7 @@ div.liste-add-container form {
  
  /* Partie graph */
  h2,h3{
-     color: #242861;
+     color: var(--color-primary);
      font-weight: 600;
  }
  
@@ -1142,7 +1163,13 @@ div.liste-add-container form {
     color : var(--color-primary);
 }
 
-.new-article-form, .modify-article-form,.modify-magasin-form, .modify-categorie-form, .delete-article-form, .new-categorie-form, .new-magasin-form{
+.new-article-form, 
+.modify-article-form,
+.modify-magasin-form,
+ .modify-categorie-form, .delete-article-form, 
+ .new-categorie-form, 
+ .new-magasin-form,
+ #edit-list-form{
     flex-direction: column ;
     display: flex;
     justify-content: center;
@@ -1167,7 +1194,15 @@ div.liste-add-container form {
     background-color: var(--gray-color-input);
 }
 
-.new-article-form button, .modify-article-form button,.modify-magasin-form button, .modify-categorie-form button, .delete-article-form button, .new-categorie-form button, .new-magasin-form button{
+.new-article-form button,
+ .modify-article-form button,
+ .modify-magasin-form button, 
+ .modify-categorie-form button, 
+ .delete-article-form button, 
+ .new-categorie-form button, 
+ .new-magasin-form button,
+ #edit-list-form button
+ {
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: var(--color-primary);
@@ -1238,19 +1273,20 @@ div.liste-add-container form {
 }
 
 
-
-#specific-list-container {
-    background-color: #F3F3F3;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    width : 80%;
-    min-height: 80vh;
+#specific-list-container { margin: 1em auto;
+    max-width: 800px;
+    border: 1px solid #2428612f;
+    width: 95%; 
+    margin-top: 20px;   font: 18px/1.5 sans-serif; 
     padding: 10px 5px;
+    background-color: #F3F3F3;
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     align-items: center;
+     justify-content: center;
 }
+
 
 #list {
     padding: 20px 20px 30px;
@@ -1411,3 +1447,4 @@ hr {
 .item-bought {
     text-decoration: line-through;
 }
+

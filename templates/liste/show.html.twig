@@ -2,11 +2,6 @@
 
 {% block title %}Liste{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('css/list.css') }}" rel="stylesheet" type="text/css">
-{% endblock %}
-
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/list-details.js') }}"></script>
@@ -14,7 +9,6 @@
 
 
 {% block body %}
-
     <div id="specific-list-container">
         <div id="list">
             <h1>Finanzen</h1>
@@ -68,19 +62,11 @@
                 <p>finanzen.com</p> {#adapter l'url#}
 {#                logo#}
             </div>
-
-
     </div>
-
-    {{ include('liste/_delete_form.html.twig') }}
-
-
-    <div id="links">
-
-        <a id="back" href="{{ path('app_home') }}">retourner à l'accueil</a>
-
-        <a href="{{ path('app_liste_edit', {'id': liste.id}) }}">éditer</a>
-
+    <div id="specific-list-links">
+        <a id="back" href="{{ path('app_home') }}">Retourner à l'accueil</a>
+        {{ include('liste/_delete_form.html.twig') }}
+        <a href="{{ path('app_liste_edit', {'id': liste.id}) }}">Modifier</a>
     </div>
 
 {% endblock %}
