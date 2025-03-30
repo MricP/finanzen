@@ -1272,8 +1272,34 @@ div.liste-add-container form {
     text-decoration: underline;
 }
 
+.ajout-articles {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-#specific-list-container { margin: 1em auto;
+.add-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.add-button img {
+    margin-right: 8px;
+}
+
+.add-button span {
+    display: flex;
+    align-items: center;
+}
+
+
+#specific-list-container {
+     margin: 1em auto;
     max-width: 800px;
     border: 1px solid #2428612f;
     width: 95%; 
@@ -1448,3 +1474,98 @@ hr {
     text-decoration: line-through;
 }
 
+/*************Composant ajout articles************************/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.modal-overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap : 0.5rem;
+}
+
+.quantity-increment {
+    width: 80px;
+}
+
+.quantity-control img{
+    width: 30px;
+    height: 30px;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.article-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tbody-articles-add {
+    display: block;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.article-table thead, .article-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-header-name, 
+.table-header-price, 
+.table-header-category, 
+.table-header-quantity {
+    background-color: #f4f4f4;
+    padding: 12px;
+    text-align: left;
+}
+
+.table-cell-name, 
+.table-cell-price, 
+.table-cell-category, 
+.table-cell-quantity {
+    padding: 12px;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}

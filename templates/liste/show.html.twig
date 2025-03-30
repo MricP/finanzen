@@ -5,11 +5,21 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/list-details.js') }}"></script>
+    <script src="{{ asset('js/add-articles-in-list.js') }}"></script>
 {% endblock %}
 
 
 {% block body %}
     <div id="specific-list-container">
+        <div class="ajout-articles">
+            <button class="add-button">
+                <img src="{{ asset('images/liste-articles.svg') }}" alt="fond du bouton"/>
+                <span>
+                    <img src="{{ asset('images/plus-icon.png') }}" alt="icon plus"/>
+                </span>
+            </button>
+        {{ component('ButtonAjoutListe', { articles: articles }) }}
+        </div>
         <div id="list">
             <h1>Finanzen</h1>
             <p>{{ liste.nom }}</p>

@@ -1,33 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("connection add-list");
-    const closeButton = document.querySelector(".close-add-list");
-    const addListButton = document.querySelector(".add-list-link");
-    const popup = document.getElementById("list-popup"); // div exterieure
-    const popupContainer = document.querySelector("div.liste-add-container"); // div interieure
+    const modal = document.querySelector(".modal-overlay");
+    const closeModal = document.querySelector(".close-modal");
+    const openModalButton = document.querySelector(".add-button");
 
-    if (closeButton) {
-        closeButton.addEventListener('click', () => {
-            popup.classList.remove("visible");
-        });
-    }
-
-    if (addListButton && popup) {
-        addListButton.addEventListener("click", (event) => {
+    if (openModalButton) {
+        openModalButton.addEventListener("click", (event) => {
             event.preventDefault();
-            popup.classList.add("visible");
-
-            fetch('/liste/new')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    popupContainer.innerHTML = doc.body.innerHTML;
-                })
-                .catch(error => {
-                    console.error('Error fetching the form:', error);
-                });
+            modal.classList.add("visible");
         });
     } else {
-        console.error("Un ou plusieurs éléments n'ont pas été trouvés dans le DOM.");
+        console.error("Le bouton d'ouverture de la modal est introuvable.");
     }
+
+    if (closeModal) {
+        closeModal.addEventListener("click", () => {
+            modal.classList.remove("visible");
+        });
+    } else {
+        console.error("Le bouton de fermeture de la modal est introuvable.");
+    }
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.classList.remove("visible");
+        }
+    });
 });
