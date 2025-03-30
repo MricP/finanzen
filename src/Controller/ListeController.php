@@ -14,14 +14,6 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/liste')]
 final class ListeController extends AbstractController
 {
-    #[Route(name: 'app_liste_index', methods: ['GET'])]
-    public function index(ListeRepository $listeRepository): Response
-    {
-        return $this->render('liste/index.html.twig', [
-            'listes' => $listeRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'app_liste_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

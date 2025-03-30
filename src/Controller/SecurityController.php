@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
             return new JsonResponse(['error' => 'Aucun fichier téléchargé'], 400);
         }
 
-        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
         if (!in_array($file->getMimeType(), $allowedMimeTypes)) {
             return new JsonResponse(['error' => 'Le fichier doit être une image JPEG, PNG ou GIF'], 400);
         }
@@ -59,6 +59,9 @@ class SecurityController extends AbstractController
         }
 
         $user = new User();
+        $user->setIsAdmin(false);
+        $user->setImage('default-user-icon.svg'); 
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -69,7 +72,6 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Stocker l'email en session pour retrouver l'utilisateur ensuite
             $session->set('from_registration', true);
             $session->set('user_email', $user->getEmail());
 
@@ -80,6 +82,8 @@ class SecurityController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+
 
     #[Route('/set-pseudo', name: 'app_set_pseudo')]
     public function setPseudo(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
