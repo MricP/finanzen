@@ -69,19 +69,35 @@ nav a:hover {
 }
 
 .logo-finanzen,
-.default-user-icon {
+.default-user-icon
+.default-user-icon-inside {
+    margin-top: 5px;
     width: 60px;
     height: 60px;
+    border-radius: 100px;
+    border: none;
 }
+
 
 header button {
     border: none;
 }
 
-.add-list-link {
+.add-list-link{
     color: var(--color-secondary);
     background-color: var(--color-primary);
     padding: 10px;
+}
+
+.add-list-link:hover{
+    text-decoration: none;
+    background-color: var(--text-color-primary);
+    color: var(--color-secondary);
+}
+
+.delete-button-admin {
+    color: var(--error-color);
+    font-weight: bold;
 }
 
 .profile-bg {
@@ -119,7 +135,30 @@ header button {
 }
 
 .profile-infos {
+    border : 1px dashed var(--color-primary);
+    border-radius: 5px;
     text-align: center;
+    padding: 5px 20px;
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.profile-infos img, .btn-profile-user img{
+    border: 1px solid black;
+    width: 60px;
+    background-color: var(--background-color);
+    height: 60px;
+    border-radius: 100%;
+}
+
+.flex-profile-email-admin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .profile-infos p {
@@ -127,14 +166,18 @@ header button {
     font-size: 1.125rem;
 }
 
-.profile-infos a {
-    color: #ff4d4f;
+.admin-button {
+    color: var(--background-color);
+    background-color: var(--error-color);
     text-decoration: none;
     font-weight: 500;
+    padding: 5px 20px;
+    margin-bottom: 5px;
 }
 
-.profile-infos a:hover {
-    text-decoration: underline;
+.admin-button:hover {
+    color: var(--text-color-secondary);
+    background-color: var(--text-color-primary);
 }
 
 .close-btn {
@@ -187,10 +230,6 @@ header button {
 
 .header-column-links a:hover {
     background: rgba(255, 255, 255, 0.2);
-}
-
-.btn-profile-user {
-    background-color: #F0F0F0;
 }
 
 .header-column-links.visible {
@@ -330,7 +369,7 @@ footer {
         padding: 10px;
     }
 
-    .default-user-icon {
+    .default-user-icon, .default-user-icon-inside {
         width: 30px;
         height: 30px;
         margin-top: 7px;
@@ -357,7 +396,7 @@ footer {
 
 
 
-
+/*page politiques, cookies popup, admin, url /admin dans crud categories et liste articles*/
 
 
 
@@ -428,6 +467,16 @@ a:hover{
 
 .main-statistic-zone > a{
     text-align: center;
+    background-color: #242861;
+    padding: 5px;
+    color: #FFFFFF;
+    width: 75%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+.main-statistic-zone > a:hover{
+    background-color: var(--text-color-primary);
 }
 
 .main-statistic-price{
@@ -472,7 +521,6 @@ a:hover{
     flex-direction: column;
     justify-content: space-between;
     width: 26%;
-    height: 35vh;
     border : 1px solid black;
     padding: 10px;
     margin: 15px 15px 15px 0;
@@ -536,7 +584,14 @@ li h2 {
     text-decoration: none;
     color: black;
     text-align: center;
+}
 
+.list-footer a:hover{
+    text-decoration: underline;
+}
+
+.btn-delete-specific{
+    background-color: var(--error-color);
 }
 
 svg.arrow {
@@ -556,7 +611,7 @@ svg.arrow {
 
 }
 
-select {
+/* select {
     height: 5vh;
     appearance: none;
     width: 100%;
@@ -567,7 +622,7 @@ select {
     border-radius: 0.25rem;
     color: #000;
     cursor: pointer;
-}
+} */
 
 /*Add list popup*/
 
@@ -582,7 +637,7 @@ select {
     height: 100vh;
 }
 
-div.container {
+div.liste-add-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -596,26 +651,26 @@ div.container {
     width: 400px;
 }
 
-div.container main {
+div.liste-add-container main {
     min-height: 0;
 }
 
-div.container h1 {
+div.liste-add-container h1 {
     text-align: center;
     margin-top: 0;
 }
 
-div.container div {
+div.liste-add-container div {
     display: flex;
     flex-direction: column;
 }
 
-div.container label {
+div.liste-add-container label {
     color : var(--color-primary);
     font-weight: bold;
 }
 
-div.container input {
+div.liste-add-container input {
     margin-top: 8px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -623,19 +678,34 @@ div.container input {
     background-color: var(--gray-color-input);
 }
 
-div.container form {
+div.liste-add-container form {
     width: 80%;
 }
 
-div.container button {
-    margin-top : 15px;
+.close-add-list{
+    color: var(--error-color);
+    margin-top: 5px;
+}
+
+.close-add-list:hover{
     font-weight: bold;
+    text-decoration: underline;
+}
+
+.liste-add-button  {
+    margin-top : 15px;
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: var(--color-primary);
     color: var(--text-color-secondary);
     font-size: 15px;
     width: 100%;
+}
+
+.liste-add-button:hover {
+    text-decoration: none;
+    background-color: black;
+    color: var(--color-secondary);
 }
 
 @media(max-width: 750px){
@@ -732,13 +802,19 @@ div.container button {
 }
 
 .infos-login,
-.infos-register,
 .infos-pseudo {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+}
+
+.infos-register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .pseudo-infos-text {
@@ -749,10 +825,16 @@ div.container button {
 }
 
 .infos-login>img,
-.infos-register>img .infos-pseudo>img {
+ .infos-pseudo>img {
     width: 50%;
     height: 50%;
 }
+.infos-register>img{
+    margin-top: 20px;
+    width: 50%;
+    height: 50%;
+}
+
 
 
 .infos-login a,
@@ -1031,8 +1113,36 @@ div.container button {
 
 
 
-/***************************CRUD***************************/ 
-.new-article-form, .delete-article-form, .new-categorie-form, .new-magasin-form{
+/***************************CRUD Admin***************************/ 
+.admin-index-icon{
+    width: 200px;
+    height: auto;
+}
+.title-admin{
+    display: flex;
+    gap: 0.5rem;
+}
+.title-admin-show{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.title-admin-icon{
+    width: 45px;
+    height: 45px;
+}
+
+.admin-links{
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-links a{
+    color : var(--color-primary);
+}
+
+.new-article-form, .modify-article-form,.modify-magasin-form, .modify-categorie-form, .delete-article-form, .new-categorie-form, .new-magasin-form{
     flex-direction: column ;
     display: flex;
     justify-content: center;
@@ -1055,11 +1165,9 @@ div.container button {
 
 .category-select, .select-magasin, .store-select {
     background-color: var(--gray-color-input);
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
-.new-article-form button, .delete-article-form button, .new-categorie-form button, .new-magasin-form button{
+.new-article-form button, .modify-article-form button,.modify-magasin-form button, .modify-categorie-form button, .delete-article-form button, .new-categorie-form button, .new-magasin-form button{
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: var(--color-primary);
@@ -1068,8 +1176,7 @@ div.container button {
     margin-top: 10px;
 }
 
-.return-to-list-link, .create-link-crud{
-    margin-top: 50px;
+.return-to-list-link, .create-link-crud, .edit-link-crud{
     font-size: 0.8rem;
 }
 
@@ -1124,4 +1231,183 @@ div.container button {
     width: 20px;    
     width: 20px;    
     margin-left: 5px;
+}
+
+.create-link-crud:hover {
+    text-decoration: underline;
+}
+
+
+
+#specific-list-container {
+    background-color: #F3F3F3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width : 80%;
+    min-height: 80vh;
+    padding: 10px 5px;
+}
+
+#list {
+    padding: 20px 20px 30px;
+    margin : 50px;
+    background-image: url("/images/wrinkled-paper-texture-7.jpg") ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45vh ;
+}
+
+#list h1 {
+    margin-bottom: 0;
+}
+
+#list h1+p, #list h1+p+p {
+    margin: 5px;
+}
+
+
+
+#headers {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    font-weight: bold;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0;
+}
+
+#list-items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#items {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*#items input:first-child {*/
+/*    width: 80%;*/
+/*    cursor: text;*/
+/*}*/
+
+#items input {
+    width: 20%;
+    border: none;
+    color: var(--text-color-primary);
+    background-color: transparent;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    padding: 2px 5px;
+    position: relative;
+}
+
+hr {
+    width: 100%;
+    border: 1px solid black;
+}
+
+#details {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+    margin: 30px 0;
+}
+
+#details p {
+    margin: 0;
+    padding: 0;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#total {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.item .trash {
+    cursor: pointer;
+    height: 3vh ;
+    display: none;
+}
+
+
+
+.item:hover .trash {
+    display: block;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#footer p {
+    margin: 0;
+    padding: 0;
+}
+
+#barcode {
+    width: 65%;
+}
+
+#links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#links a {
+    text-decoration: none;
+    color: var(--text-color-primary);
+    font-size: 16px;
+    padding: 2px 5px;
+}
+
+#container button {
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-family: "Inter", Arial, sans-serif;
+}
+
+.item-bought {
+    text-decoration: line-through;
 }

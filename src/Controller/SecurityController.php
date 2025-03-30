@@ -17,6 +17,40 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class SecurityController extends AbstractController
 {
+    #[Route('/upload-profile-picture', name: 'app_upload_profile_picture', methods: ['POST'])]
+    public function uploadProfilePicture(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $file = $request->files->get('profile-picture');
+
+        if (!$file) {
+            return new JsonResponse(['error' => 'Aucun fichier téléchargé'], 400);
+        }
+
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($file->getMimeType(), $allowedMimeTypes)) {
+            return new JsonResponse(['error' => 'Le fichier doit être une image JPEG, PNG ou GIF'], 400);
+        }
+
+        $uploadDir = $this->getParameter('kernel.project_dir') . '/public/images/user-profile';
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileName = uniqid() . '.' . $file->guessExtension();
+        $file->move($uploadDir, $fileName);
+
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(['error' => 'Utilisateur non authentifié'], 401);
+        }
+
+        $user->setImage($fileName);
+        $entityManager->flush();
+
+        return new JsonResponse(['success' => true, 'imagePath' =>  $fileName]);
+    }
+
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {

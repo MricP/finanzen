@@ -15,7 +15,7 @@
 
 {% block body %}
 
-    <div id="container">
+    <div id="specific-list-container">
         <div id="list">
             <h1>Finanzen</h1>
             <p>{{ liste.nom }}</p>
@@ -79,7 +79,7 @@
 
         <a id="back" href="{{ path('app_home') }}">retourner à l'accueil</a>
 
-        <a href="{{ path('app_liste_edit', {'id': liste.id}) }}">edit</a>
+        <a href="{{ path('app_liste_edit', {'id': liste.id}) }}">éditer</a>
 
     </div>
 

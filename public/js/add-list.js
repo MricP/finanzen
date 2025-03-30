@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("connection add-list");
-
+    const closeButton = document.querySelector(".close-add-list");
     const addListButton = document.querySelector(".add-list-link");
     const popup = document.getElementById("list-popup"); // div exterieure
-    const popupContainer = document.querySelector("div.container"); // div interieure
+    const popupContainer = document.querySelector("div.liste-add-container"); // div interieure
+
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
+            popup.classList.remove("visible");
+        });
+    }
 
     if (addListButton && popup) {
         addListButton.addEventListener("click", (event) => {

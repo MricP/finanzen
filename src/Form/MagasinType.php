@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\Article;
@@ -17,11 +16,11 @@ class MagasinType extends AbstractType
             ->add('nom', null, [
                 'attr' => ['class' => 'form-control magasin-name-input'],
             ])
-            ->add('magasins', EntityType::class, [
-                'class' => Magasin::class,
-                'choice_label' => 'id',
+            ->add('articles', EntityType::class, [
+                'class' => Article::class,
+                'choice_label' => 'nom', 
                 'multiple' => true,
-                'attr' => ['class' => 'form-control store-select'],
+                'attr' => ['class' => 'form-control article-select'],
             ]);
     }
 
