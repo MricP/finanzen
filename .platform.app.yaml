@@ -1,5 +1,5 @@
 # The name of this app. Must be unique within a project.
-name: app
+name: finanzen
 
 # The runtime the application uses. The 'type' key defines the base container
 # image that will be used to run the application. There is a separate base
@@ -14,6 +14,11 @@ type: 'php:8.2.28'
 # indicates that the mount point will point to a local directory on the
 # application container. The 'source_path' specifies the subdirectory
 # from within the source that the mount should point at. 
+web: finanzen/public
+routes:
+  - uri: /index.php
+    document_root: /public
+
 mounts:
   'web/uploads':
     source: local
