@@ -1,0 +1,69 @@
+{% block javascripts %}
+<script src="{{ asset('js/header.js') }}"></script>
+{% endblock %}
+<header{{ attributes }}>
+    <a href="{{ path('app_home') }}" class="logo-finanzen">
+        <img src="{{ asset('images/logos/logo-finanzen1.svg') }}" class="logo-finanzen"
+            alt="logo finanzen avec un caddie dedans" />
+    </a>
+    <nav class="destock-nav">
+        <a href="{{ path('app_home') }}">Mes listes</a>
+        <a class="add-list-link" href="{#{{ path('app_liste_new') }}#}">Ajouter une liste</a>
+        <button class="btn-profile-user">
+            {% if app.user %}
+                <img src="{{ app.user.image ? asset('images/user-profile/' ~ app.user.image) : asset('images/user-profile/default-user-icon.svg') }}" 
+                    alt="image de profil de l'utilisateur" 
+                    class="default-user-icon" />
+            {% endif %}
+        </button>
+    </nav>
+    <nav class="mobile-nav">
+        <button class="btn-profile-user-nav">
+             {% if app.user %}
+                <img src="{{ app.user.image ? asset('images/user-profile/' ~ app.user.image) : asset('images/default-user-icon.svg') }}" 
+                    alt="image de profil de l'utilisateur" 
+                    class="default-user-icon" />
+            {% endif %}
+        </button>
+        <button class="menu-burger" aria-label="Menu">
+            ☰
+        </button>
+        <div class="header-column-links">
+            <a href="{{ path('app_home') }}">Mes listes</a>
+            <a href="">Ajouter une liste</a>
+        </div>
+    </nav>
+    {% if app.user %}
+    <div class="profile-bg" id="profilePopup">
+        <div class="profile-container">
+            <div class="profile-infos">
+                {% if app.user %}
+                    <img src="{{ app.user.image ? asset('images/user-profile/' ~ app.user.image) : asset('images/user-profile/default-user-icon.svg') }}" 
+                        alt="image de profil de l'utilisateur" 
+                        class="default-user-icon-inside" />
+                    {% endif %}
+                  <input type="file" name="profile-picture" id="profile-picture-input" accept="image/*">
+                <div class="flex-profile-email-admin"
+                <p>Hello, {{ app.user.userIdentifier }}</p>
+                    {% if app.user.isAdmin %}
+                    <a class="admin-button" href="{{ path('app_admin') }}">Admin</a>
+                    {% endif %}
+                </div>
+                <button id="modify-button">Modifier</button>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                <form class="modify-modal-form">
+                    <p class="error-message">
+                        
+                    </p>
+                    <input type="text" name="pseudo" id="pseudo-input" placeholder="Pseudo">
+                    <input type="email" name="email" id="email-input" placeholder="Email">
+                    <input type="password" name="old-password" id="old-password-input" placeholder="Ancien mot de passe">
+                    <input type="password" name="new-password" id="new-password-input" placeholder="Nouveau mot de passe">
+                    <button type="submit">Valider</button>
+                </form>
+            </div>
+            <button class="close-btn">✕</button>
+        </div>
+    </div>
+    {% endif %}
+    </header>

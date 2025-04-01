@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div class='register-flex-container'>
+		<div class='flex-1 register-img-section'>
+			<img src="{{ asset('images/register-img.svg') }}" alt="Register Image">
+		</div>
+		<div class='flex-2'>
+			<div class='form-container'>
+				<div class="infos-register">
+					<img src="{{ asset('images/logos/logo-finanzen1.svg') }}" alt="FinanZen Logo">
+					<h1 class="h3 mb-3 font-weight-normal">FinanZen</h1>
+					<a href="#">Politique de cookies</a>
+				</div>
+				{{ form_start(registrationForm, {'attr': {'class': 'form-register'}}) }}
+				{{ form_row(registrationForm.email, {'label': 'Email*', 'attr': {'class': 'input-email-register'}}) }}
+				{{ form_row(registrationForm.plainPassword.first, {'label': 'Mot de passe*', 'attr': {'class': 'input-password'}}) }}
+				{{ form_row(registrationForm.plainPassword.second, {'label': 'Confirmer mot de passe*', 'attr': {'class': 'input-confirm-password'}}) }}
+				{{ form_row(registrationForm.agreeTerms, {'label': 'J’accepte les termes', 'attr': {'class': 'agree-terms-checkbox'}}) }}
+				{{ form_errors(registrationForm) }}
+				<button type="submit" class="btn">S'inscrire</button>
+				<a class="login_link" href="{{ path('app_login') }}">Déjà inscrit ?</a>
+				{{ form_end(registrationForm) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

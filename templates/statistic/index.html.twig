@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+</style>
+
+<div class="example-wrapper" >
+    <div class="statistic">
+        <div class="statistic-zone">
+            <div class="main-statistic-zone">
+                <div>
+                    <p>Somme dépensée cette année</p>
+                    <p class="main-statistic-price">{{user.yearSpend}}€</p>
+                </div>
+                <div>
+                    <p>Somme total dépensée ce mois</p>
+                    <p class="main-statistic-price">{{user.monthSpend}}€</p>
+                </div>
+            </div>
+            <div class="secondary-statistic-zone">
+                <div class="secondary-statistic-row">
+                    <p>Coût par article :</p>
+                    <p class="secondary-statistic-price">{{liste_article}} €</p>
+                </div>
+                <div class="secondary-statistic-row">
+                    <p>L'article le plus cher :</p>
+                    <p class="secondary-statistic-price">{{article_max}} €</p>
+                </div>
+                <div class="secondary-statistic-row">
+                    <p>L'article le moins cher :</p>
+                    <p class="secondary-statistic-price">{{article_min}} €</p>
+                </div>
+            </div>
+        </div>
+        <div class="third-statistic-zone">
+            <p>budget mensuel :</p>
+            <p class="secondary-statistic-price">{{user.monthBudget}}€</p>
+        </div>
+</div>
+{# Graphique #}
+    <div class="graph">
+        <h2>Graphique des courses</h2>
+    </div>
+    <div class="graph-container">
+      <div>
+          <h3>Diagrammes des dépenses par mois</h3>
+          <canvas id="barChart"></canvas>
+      </div>
+      <div class="pieChart-container">
+          <h3>Diagramme des achats par catégories</h3>
+          <div class="pieChart-wrapper">
+              <canvas id="pieChart"></canvas>
+          </div>
+      </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    var barChart = document.getElementById('barChart');
+
+    var budgetMensuel = {{user.monthBudget}}; 
+    
+    var depenses = {{ depenses|raw }}; ;
+
+    var couleurs = depenses.map(depense => depense > budgetMensuel ? '#FF6B6C50' : '#04E76250');
+    var bordercolors =  depenses.map(depense => depense > budgetMensuel ? '#FF6B6C' : '#04E762');
+    new Chart(barChart, {
+        type: 'bar',
+        title: "Somme dépensé par mois",
+        data: {
+            labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            datasets: [{
+                data: depenses,
+                borderWidth: 1,
+                borderColor: bordercolors,
+                backgroundColor: couleurs
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        generateLabels: function(chart) {
+                            return [
+                                {
+                                    text: 'Dépenses inférieur au Budget',
+                                    fillStyle: '#04E76250',
+                                    strokeStyle: '#04E762'
+                                },
+                                {
+                                    text: 'Dépenses supérieur au Budget',
+                                    fillStyle: '#FF6B6C50',
+                                    strokeStyle: '#FF6B6C'
+                                }
+                            ];
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+          
+        }
+    });
+
+    const donnéesCategorie = {{depenseParCategorie|raw}};
+
+    function getColorForCategory(categoryName) {
+        const categoryColors = {
+            'Alimentation': '#FF5733a0', 
+            'Hygiène': '#FF33A1a0', 
+            'Maison': '#3357FFa0', 
+            'Loisirs': '#33FF57a0',
+            'Divers': '#FFDB33a0',
+            'Transport': '#D9CFC1a0', 
+            'Vêtements': '#A77E58a0', 
+            'Santé': '#EEE3ABa0', 
+            'Autres': '#EEC0C6a0',
+        };
+
+        return categoryColors[categoryName] || '#808080a0'; 
+    }
+
+    const data = {
+        labels: Object.keys(donnéesCategorie),
+        datasets: [{
+            label: '€',
+            data: Object.values(donnéesCategorie),
+            fill: true,
+            backgroundColor: Object.keys(donnéesCategorie).map(category => getColorForCategory(category)),
+            borderColor: '#fff',
+            borderWidth: 1,
+        }]
+    };
+
+    const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            elements: {
+                line: {
+                    borderWidth: 3
+                }
+            }
+        },
+    };
+    pieChart.style.width = "200px"; 
+    pieChart.style.height = "200px";
+    new Chart(pieChart, config);
+  }); 
+</script>
+{% endblock %}
+

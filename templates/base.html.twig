@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>
+		{% block title %}Welcome!
+		{% endblock %}
+	</title>
+	<link rel="icon"
+		href="{{ asset('images/logos/favicon.ico')}}">
+	{% block stylesheets %}{% endblock %}
+	{% block javascripts %}
+	{% block importmap %}
+	{{ importmap('app') }}
+	{% endblock %}
+	{% endblock %}
+</head>
+
+<body class="{{ app.user ? 'logged-body' : '' }}">
+	{% if app.request.attributes.get('_route') not in ['app_register', 'app_set_pseudo', 'app_login'] %}
+	<twig:Header />
+	{% endif %}
+	<main>
+		{% block body %}{% endblock %}
+	</main>
+	{% if app.request.attributes.get('_route') not in ['app_register', 'app_set_pseudo', 'app_login'] %}
+	<twig:Footer />
+	{% endif %}
+</body>
+
+</html>

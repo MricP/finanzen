@@ -1,0 +1,43 @@
+security:
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    access_control:
+        - { path: ^/admin-x7y2z9w4, roles: ROLE_ADMIN }
+        - { path: /home, roles: ROLE_USER }
+        - { path: /liste, roles: ROLE_USER }
+        - { path: /liste/*, roles: ROLE_USER }
+        - { path: /categorie/*, roles: ROLE_ADMIN }
+        - { path: /magasin/*, roles: ROLE_ADMIN }
+        - { path: /article/*, roles: ROLE_ADMIN }
+
+    password_hashers:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                username_parameter: email
+                password_parameter: password
+
+            entry_point: App\Security\LoginFormAuthenticatorPhpAuthenticator
+
+            logout:
+                path: app_logout
+                target: app_login
+
+            provider: app_user_provider
