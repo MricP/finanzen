@@ -28,4 +28,4 @@ disk: 256
 # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
 # side is in the form '<service name>:<endpoint name>'.
 relationships:
-    oracle-mysql: 'oracle-mysql:mysql'
+    database: 'db:mysql'
