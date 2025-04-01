@@ -109,7 +109,7 @@ class AppFixtures extends Fixture
         $manager->persist($liste1);
 
         $liste2 = new Liste();
-        $liste2->setNom("Mars");
+        $liste2->setNom("Avril");
         $liste2->setDateCreation(new \DateTime());
         $liste2->setUser($user);
         $manager->persist($liste2);
