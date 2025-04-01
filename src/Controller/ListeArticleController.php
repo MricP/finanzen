@@ -62,16 +62,20 @@ final class ListeArticleController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'app_liste_article_delete', methods: ['POST'])]
-    public function delete(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): JsonResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$listeArticle->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$listeArticle->getId(), $request->request->get('_token'))) {
             $entityManager->remove($listeArticle);
             $entityManager->flush();
+            
+            return new JsonResponse(['status' => 'success'], 200);
         }
-
-        return $this->redirectToRoute('app_liste_article_index', [], Response::HTTP_SEE_OTHER);
+        
+        return new JsonResponse([
+            'status' => 'error', 
+            'message' => 'Invalid CSRF token'
+        ], 400);
     }
-
 
     #[Route('/add/{liste_id}', name: 'app_liste_article_add', methods: ['POST'])]
     public function addArticle(Request $request, int $liste_id, EntityManagerInterface $entityManager): JsonResponse

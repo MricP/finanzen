@@ -1591,3 +1591,7 @@ hr {
     top: 10px;
     right: 15px;
 }
+
+.delete-article-liste-btn {
+    border : none;
+}
