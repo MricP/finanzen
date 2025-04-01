@@ -118,4 +118,20 @@ final class ListeArticleController extends AbstractController
             return new JsonResponse(['status' => 'error', 'message' => 'Une erreur est survenue.'], 500);
         }
     }
+
+    #[Route('/update-quantity/{id}', name: 'app_liste_article_update_quantity', methods: ['POST'])]
+    public function updateQuantity(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): JsonResponse
+    {
+        if ($request->isXmlHttpRequest()) {
+            $data = json_decode($request->getContent(), true);
+            $newQuantity = $data['quantity'];
+
+            $listeArticle->setQuantite($newQuantity);
+            $entityManager->flush();
+
+            return new JsonResponse(['status' => 'Quantity updated'], 200);
+        }
+
+        return new JsonResponse(['status' => 'Invalid request'], 400);
+    }
 }
