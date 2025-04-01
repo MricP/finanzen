@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ListeArticle;
+use App\Entity\User;
 use App\Form\ListeArticleType;
 use App\Repository\ListeArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -65,14 +66,25 @@ final class ListeArticleController extends AbstractController
     public function delete(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): JsonResponse
     {
         if ($this->isCsrfTokenValid('delete'.$listeArticle->getId(), $request->request->get('_token'))) {
+            $total = $listeArticle->getTotal();
+
+            if ($listeArticle->isEstAchete()) {
+                $user = $this->getUser();
+                if ($user instanceof User) {
+                    $user->setMonthSpend($user->getMonthSpend() - $total);
+                    $user->setYearSpend($user->getYearSpend() - $total);
+                    $entityManager->persist($user);
+                }
+            }
+
             $entityManager->remove($listeArticle);
             $entityManager->flush();
-            
+
             return new JsonResponse(['status' => 'success'], 200);
         }
-        
+
         return new JsonResponse([
-            'status' => 'error', 
+            'status' => 'error',
             'message' => 'Invalid CSRF token'
         ], 400);
     }
@@ -125,8 +137,21 @@ final class ListeArticleController extends AbstractController
         if ($request->isXmlHttpRequest()) {
             $data = json_decode($request->getContent(), true);
             $newQuantity = $data['quantity'];
+            $oldQuantity = $listeArticle->getQuantite();
+            $difference = $newQuantity - $oldQuantity;
+            $totalDifference = $difference * $listeArticle->getArticles()->getPrix();
 
             $listeArticle->setQuantite($newQuantity);
+
+            if ($listeArticle->isEstAchete()) {
+                $user = $this->getUser();
+                if ($user instanceof User) {
+                    $user->setMonthSpend($user->getMonthSpend() + $totalDifference);
+                    $user->setYearSpend($user->getYearSpend() + $totalDifference);
+                    $entityManager->persist($user);
+                }
+            }
+
             $entityManager->flush();
 
             return new JsonResponse(['status' => 'Quantity updated'], 200);
@@ -138,13 +163,27 @@ final class ListeArticleController extends AbstractController
     #[Route('/toggle/{id}', name: 'app_liste_article_toggle', methods: ['POST'])]
     public function toggleEstAchete(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): JsonResponse
     {
-        if ($request->isXmlHttpRequest()) {
-            $listeArticle->setEstAchete(!$listeArticle->isEstAchete());
-            $entityManager->flush();
-
-            return new JsonResponse(['status' => 'success'], 200);
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            return new JsonResponse(['status' => 'error', 'message' => 'Utilisateur non trouvé'], 404);
         }
 
-        return new JsonResponse(['status' => 'Invalid request'], 400);
+        $total = $listeArticle->getTotal();
+        $isAchete = $listeArticle->isEstAchete();
+        $listeArticle->setEstAchete(!$isAchete);
+
+        if (!$isAchete) {
+            $user->setMonthSpend($user->getMonthSpend() + $total);
+            $user->setYearSpend($user->getYearSpend() + $total);
+        } else {
+            $user->setMonthSpend($user->getMonthSpend() - $total);
+            $user->setYearSpend($user->getYearSpend() - $total);
+        }
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return new JsonResponse(['status' => 'success'], 200);
     }
+
 }
