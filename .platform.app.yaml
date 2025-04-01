@@ -29,3 +29,7 @@ disk: 256
 # side is in the form '<service name>:<endpoint name>'.
 relationships:
     oracle-mysql: 'oracle-mysql:mysql'
+
+variables:
+    env:
+      DATABASE_URL=mysql://root@127.0.0.1:3306/finanzen?serverVersion=8.3&charset=utf8
