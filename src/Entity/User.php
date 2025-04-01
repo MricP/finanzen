@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +48,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?float $monthBudget = null;
 
+    #[ORM\Column]
+    private ?bool $isAdmin = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $image = null;
+
+    /**
+     * @var Collection<int, Liste>
+     */
+    #[ORM\OneToMany(targetEntity: Liste::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $listes;
+
+    public function __construct()
+    {
+        $this->listes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,11 +105,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+
+        if ($this->isAdmin) {
+            $roles[] = 'ROLE_ADMIN';
+        }
 
         return array_unique($roles);
     }
+
 
     /**
      * @param list<string> $roles
@@ -175,6 +198,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMonthBudget(?float $monthBudget): static
     {
         $this->monthBudget = $monthBudget;
+
+        return $this;
+    }
+
+    public function isAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): static
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Liste>
+     */
+    public function getListes(): Collection
+    {
+        return $this->listes;
+    }
+
+    public function addListe(Liste $liste): static
+    {
+        if (!$this->listes->contains($liste)) {
+            $this->listes->add($liste);
+            $liste->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListe(Liste $liste): static
+    {
+        if ($this->listes->removeElement($liste)) {
+            // set the owning side to null (unless already changed)
+            if ($liste->getUser() === $this) {
+                $liste->setUser(null);
+            }
+        }
 
         return $this;
     }

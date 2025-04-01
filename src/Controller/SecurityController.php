@@ -11,12 +11,47 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class SecurityController extends AbstractController
 {
+    #[Route('/upload-profile-picture', name: 'app_upload_profile_picture', methods: ['POST'])]
+    public function uploadProfilePicture(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $file = $request->files->get('profile-picture');
+
+        if (!$file) {
+            return new JsonResponse(['error' => 'Aucun fichier téléchargé'], 400);
+        }
+
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+        if (!in_array($file->getMimeType(), $allowedMimeTypes)) {
+            return new JsonResponse(['error' => 'Le fichier doit être une image JPEG, PNG ou GIF'], 400);
+        }
+
+        $uploadDir = $this->getParameter('kernel.project_dir') . '/public/images/user-profile';
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileName = uniqid() . '.' . $file->guessExtension();
+        $file->move($uploadDir, $fileName);
+
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(['error' => 'Utilisateur non authentifié'], 401);
+        }
+
+        $user->setImage($fileName);
+        $entityManager->flush();
+
+        return new JsonResponse(['success' => true, 'imagePath' =>  $fileName]);
+    }
+
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
@@ -25,6 +60,12 @@ class SecurityController extends AbstractController
         }
 
         $user = new User();
+        $user->setIsAdmin(false);
+        $user->setImage('default-user-icon.svg'); 
+        $user->setYearSpend(0);
+        $user->setMonthSpend(0);
+        $user->setMonthBudget(0);
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -35,7 +76,6 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Stocker l'email en session pour retrouver l'utilisateur ensuite
             $session->set('from_registration', true);
             $session->set('user_email', $user->getEmail());
 
@@ -46,6 +86,8 @@ class SecurityController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+
 
     #[Route('/set-pseudo', name: 'app_set_pseudo')]
     public function setPseudo(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
@@ -159,5 +201,33 @@ class SecurityController extends AbstractController
         $entityManager->flush();
 
         return $this->json(['success' => 'Informations mises à jour']);
+    }
+
+
+    #[Route('/budget/update', name: 'app_budget_update', methods: ['POST'])]
+    public function updateBudget(Request $request, UserRepository $userRepository): JsonResponse
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This action can only be accessed via AJAX.');
+        }
+
+        $user = $this->getUser();
+
+        if (!$user) {
+            return new JsonResponse(['error' => 'User not found'], 404);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $newBudget = $data['monthBudget'] ?? 10;
+        dump($data);
+        
+
+        if ($newBudget === null || !is_numeric($newBudget)) {
+            return new JsonResponse(['error' => 'Invalid budget value'], 400);
+        }
+
+        $userRepository->updateBudget($user, (float) $newBudget);
+
+        return new JsonResponse(['status' => 'Budget updated', 'monthBudget' => $user->getMonthBudget()]);
     }
 }
