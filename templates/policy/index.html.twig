@@ -1,20 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PolicyController!{% endblock %}
+{% block title %}Politique de Confidentialité{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .example-wrapper { background-color: #F3F3F3; border: 2px solid rgba(36, 40, 97, .2) ; padding: 25px; margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
 </style>
-
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
+    <h1>Politique de Confidentialité</h1>
+    <p>
+        Bienvenue sur notre site web. La protection de vos données personnelles est très importante pour nous. Cette politique de confidentialité explique comment nous collectons, utilisons, partageons et protégeons vos données personnelles.
+    </p>
+    <h2>Collecte des données personnelles</h2>
+    <p>
+        Nous collectons des données personnelles lorsque vous utilisez notre site web, notamment :
+    </p>
     <ul>
-        <li>Your controller at <code>C:/wamp64/www/Symfony/finanzen/src/Controller/PolicyController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/Symfony/finanzen/templates/policy/index.html.twig</code></li>
+        <li>Les informations que vous fournissez volontairement, telles que votre nom, adresse email, et numéro de téléphone lorsque vous créez un compte ou remplissez un formulaire de contact.</li>
+        <li>Les informations collectées automatiquement, telles que votre adresse IP, le type de navigateur, les pages consultées, et les horaires de visite.</li>
     </ul>
+    <h2>Utilisation des données personnelles</h2>
+    <p>
+        Nous utilisons vos données personnelles pour :
+    </p>
+    <ul>
+        <li>Fournir et améliorer nos services.</li>
+        <li>Personnaliser votre expérience utilisateur sur notre site web.</li>
+        <li>Vous contacter concernant nos services ou pour répondre à vos demandes.</li>
+        <li>Analyser l'utilisation de notre site web et améliorer son fonctionnement.</li>
+    </ul>
+    <h2>Partage des données personnelles</h2>
+    <p>
+        Nous ne vendons, n'échangeons, ni ne transférons vos données personnelles à des tiers sans votre consentement, sauf dans les cas suivants :
+    </p>
+    <ul>
+        <li>Avec des prestataires de services tiers qui nous aident à exploiter notre site web, à condition qu'ils acceptent de garder ces informations confidentielles.</li>
+        <li>Lorsque cela est nécessaire pour se conformer à la loi, appliquer les politiques de notre site, ou protéger nos droits ou ceux des autres.</li>
+    </ul>
+    <h2>Protection des données personnelles</h2>
+    <p>
+        Nous mettons en œuvre diverses mesures de sécurité pour maintenir la sécurité de vos données personnelles. Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n'est sûre à 100 %.
+    </p>
+    <h2>Vos droits</h2>
+    <p>
+        Vous avez le droit d'accéder à vos données personnelles, de les rectifier, de les effacer, et de vous opposer à leur traitement. Pour exercer ces droits, veuillez nous contacter à [adresse email].
+    </p>
+    <h2>Modifications de la politique de confidentialité</h2>
+    <p>
+        Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. Les modifications seront publiées sur cette page avec la date de la dernière mise à jour.
+    </p>
+    <p>
+        Dernière mise à jour : [Date de la dernière mise à jour]
+    </p>
 </div>
 {% endblock %}
