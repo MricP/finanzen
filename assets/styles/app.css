@@ -83,10 +83,17 @@ header button {
     border: none;
 }
 
-.add-list-link{
+.add-list-link, .add-list-btn{
     color: var(--color-secondary);
     background-color: var(--color-primary);
     padding: 10px;
+}
+
+.add-article-s-btn{
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    padding: 10px;
+    margin-bottom: 15px;
 }
 
 .add-list-link:hover{
@@ -515,6 +522,22 @@ a:hover{
     justify-content: right;
     gap: 10px;
 }
+
+.secondary-statistic-price-input{
+    color: var(--color-primary);
+    font-size: 1.75em;
+    font-weight: 600;
+    width: 15%;
+    background-color: var(--background-color);
+    outline: none;
+    border: none;
+}
+
+.secondary-statistic-price-input:focus{
+    outline: initial;
+    border: 1px solid var(--color-primary);;
+}
+
 
 .liste {
     display: flex;
@@ -1225,7 +1248,6 @@ div.liste-add-container form {
 .table td {
     border: 1px solid var(--gray-color-input);
     padding: 10px;
-    text-align: left;
 }
 
 .table th {
@@ -1550,7 +1572,7 @@ hr {
 .table-header-quantity {
     background-color: #f4f4f4;
     padding: 12px;
-    text-align: left;
+    text-align: center;
 }
 
 .table-cell-name, 

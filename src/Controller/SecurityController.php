@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -200,5 +201,33 @@ class SecurityController extends AbstractController
         $entityManager->flush();
 
         return $this->json(['success' => 'Informations mises à jour']);
+    }
+
+
+    #[Route('/budget/update', name: 'app_budget_update', methods: ['POST'])]
+    public function updateBudget(Request $request, UserRepository $userRepository): JsonResponse
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This action can only be accessed via AJAX.');
+        }
+
+        $user = $this->getUser();
+
+        if (!$user) {
+            return new JsonResponse(['error' => 'User not found'], 404);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $newBudget = $data['monthBudget'] ?? 10;
+        dump($data);
+        
+
+        if ($newBudget === null || !is_numeric($newBudget)) {
+            return new JsonResponse(['error' => 'Invalid budget value'], 400);
+        }
+
+        $userRepository->updateBudget($user, (float) $newBudget);
+
+        return new JsonResponse(['status' => 'Budget updated', 'monthBudget' => $user->getMonthBudget()]);
     }
 }

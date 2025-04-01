@@ -15,14 +15,6 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/liste/article')]
 final class ListeArticleController extends AbstractController
 {
-    #[Route(name: 'app_liste_article_index', methods: ['GET'])]
-    public function index(ListeArticleRepository $listeArticleRepository): Response
-    {
-        return $this->render('liste_article/index.html.twig', [
-            'liste_articles' => $listeArticleRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'app_liste_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -69,7 +61,7 @@ final class ListeArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_liste_article_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_liste_article_delete', methods: ['POST'])]
     public function delete(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$listeArticle->getId(), $request->getPayload()->getString('_token'))) {
@@ -81,19 +73,45 @@ final class ListeArticleController extends AbstractController
     }
 
 
-    #[Route('/update-quantity/{id}', name: 'app_liste_article_update_quantity', methods: ['POST'])]
-    public function updateQuantity(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/add/{liste_id}', name: 'app_liste_article_add', methods: ['POST'])]
+    public function addArticle(Request $request, int $liste_id, EntityManagerInterface $entityManager): JsonResponse
     {
-        if ($request->isXmlHttpRequest()) {
+        try {
             $data = json_decode($request->getContent(), true);
-            $newQuantity = $data['quantity'];
 
-            $listeArticle->setQuantite($newQuantity);
+            if (!$data || !isset($data['articles']) || !is_array($data['articles'])) {
+                return new JsonResponse(['status' => 'error', 'message' => 'Données invalides'], 400);
+            }
+            error_log("liste id" . $liste_id);
+            $liste  = $entityManager->getRepository(\App\Entity\Liste::class)->find($liste_id);
+            if (!$liste) {
+                return new JsonResponse(['status' => 'error', 'message' => 'Liste non trouvée'], 404);
+            }
+
+            foreach ($data['articles'] as $articleData) {
+                $articleId = $articleData['id'];
+                $quantity = $articleData['quantity'];
+
+                $article = $entityManager->getRepository(\App\Entity\Article::class)->find($articleId);
+                if (!$article) {
+                    return new JsonResponse(['status' => 'error', 'message' => "Article avec l'ID {$articleId} non trouvé"], 404);
+                }
+
+                $listeArticle = new ListeArticle();
+                $listeArticle->setArticles($article);
+                $listeArticle->setListes($liste);
+                $listeArticle->setQuantite($quantity);
+                $listeArticle->setEstAchete(false);
+
+                $entityManager->persist($listeArticle);
+            }
+
             $entityManager->flush();
-
-            return new JsonResponse(['status' => 'Quantity updated'], 200);
+            
+            return new JsonResponse(['status' => 'success']);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            return new JsonResponse(['status' => 'error', 'message' => 'Une erreur est survenue.'], 500);
         }
-
-        return new JsonResponse(['status' => 'Invalid request'], 400);
     }
 }

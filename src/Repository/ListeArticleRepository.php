@@ -5,15 +5,21 @@ namespace App\Repository;
 use App\Entity\ListeArticle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface; 
+use App\Entity\User;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @extends ServiceEntityRepository<ListeArticle>
  */
 class ListeArticleRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $tokenStorage;
+
+    public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokenStorage)
     {
         parent::__construct($registry, ListeArticle::class);
+        $this->tokenStorage = $tokenStorage;
     }
 
        /**
@@ -21,13 +27,22 @@ class ListeArticleRepository extends ServiceEntityRepository
         */
         public function findMonthList(): array
         {
+            $token = $this->tokenStorage->getToken();
+
+            if (!$token) {
+                return []; 
+            }
+            $user = $token->getUser();
+
+
             $results = $this->createQueryBuilder('la')
             ->select('l.dateCreation AS date_creation, SUM(a.prix * la.quantite) AS total')
             ->join('la.listes', 'l') 
-            ->join('la.articles', 'a')  
-            ->groupBy('l.dateCreation')
-            ->orderBy('l.dateCreation', 'ASC')
+            ->join('la.articles', 'a')
+            ->join('l.user', 'u')
             ->where('la.est_achete = true')
+            ->andWhere('u.id = :userId')
+            ->setParameter('userId', $user->getId())
             ->getQuery()
             ->getResult();
             
@@ -49,15 +64,26 @@ class ListeArticleRepository extends ServiceEntityRepository
 
         public function findByCategory(): array
         {
+            $token = $this->tokenStorage->getToken();
+
+            if (!$token) {
+                return []; 
+            }
+
+
+            $user = $token->getUser();
             $currentMonth = date('m');
             $results = $this->createQueryBuilder('la')
             ->select('c.nom AS nom_categorie, l.dateCreation AS date_creation, SUM(a.prix * la.quantite) AS total')
             ->join('la.listes', 'l')
             ->join('la.articles', 'a')
             ->join('a.categorie', 'c')
+            ->join('l.user', 'u')
             ->where('la.est_achete = true')
             ->andWhere('l.dateCreation LIKE :currentMonthPattern') 
+            ->andWhere('u.id = :userId')
             ->setParameter('currentMonthPattern', '%-' . $currentMonth . '-%') 
+            ->setParameter('userId', $user->getId())
             ->groupBy('c.nom')
             ->getQuery()
             ->getResult();
