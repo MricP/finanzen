@@ -18,24 +18,33 @@ document.addEventListener('DOMContentLoaded', function() {
                         'Content-Type': 'application/json',
                         'X-CSRF-Token': csrfToken
                     },
-                    body: JSON.stringify({ 
+                    body: JSON.stringify({
                         quantity: newQuantity,
-                        _token: csrfToken 
+                        _token: csrfToken
                     })
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.status === 'success') {
+                    data.oldQuantity = this.defaultValue;
+                    console.log('Old Quantity:', data.oldQuantity);
+                    console.log("status : " + data.status)
+                    if (data.status === 'Quantity updated') {
                         const newPrice = newQuantity * pricePerUnit;
                         itemElement.querySelector('.total-price').textContent = newPrice.toFixed(2) + '€';
+                        this.defaultValue = newQuantity;
                         console.log('Quantity and price updated successfully');
 
                         let total = 0;
                         document.querySelectorAll('#list-items .item').forEach(function(item) {
-                            const itemQuantity = parseFloat(item.querySelector('input').value) || 0;
-                            const itemPricePerUnit = parseFloat(item.querySelector('.price-per-unit').textContent) || 0;
-                            total += itemQuantity * itemPricePerUnit;
+                            const itemQuantityInput = item.querySelector('input[type="number"]');
+                            const itemPricePerUnitElement = item.querySelector('.price-per-unit');
+                            if (itemQuantityInput && itemPricePerUnitElement) {
+                                const itemQuantity = parseInt(itemQuantityInput.value) || 0;
+                                const itemPricePerUnit = parseFloat(itemPricePerUnitElement.textContent) || 0;
+                                total += itemQuantity * itemPricePerUnit;
+                            }
                         });
+
                         document.querySelector('#total p:last-child').textContent = total.toFixed(2) + '€';
                     } else {
                         console.error('Failed to update quantity and price');

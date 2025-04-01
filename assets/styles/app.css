@@ -1343,7 +1343,7 @@ div.liste-add-container form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 45vh ;
+    width: 46vh ;
 }
 
 #list h1 {
@@ -1362,9 +1362,11 @@ div.liste-add-container form {
     list-style: none;
     font-weight: bold;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 0;
 }
+
+
 
 #list-items {
     width: 100%;
@@ -1395,6 +1397,7 @@ div.liste-add-container form {
     font-family: "Inter", Arial, sans-serif;
     font-size: 16px;
     text-align: center;
+    margin-right: 5px;
 }
 
 
@@ -1402,12 +1405,16 @@ div.liste-add-container form {
 .item {
     display: flex;
     flex-direction: row;
-    /*justify-content: space-around;*/
-    align-items: center;
+        align-items: center;
     justify-items: center;
     width: 100%;
     padding: 2px 5px;
     position: relative;
+}
+
+p#item-name {
+    width: 40%;
+    text-align: center;
 }
 
 hr {
@@ -1428,6 +1435,7 @@ hr {
     padding: 0;
 }
 
+
 #footer {
     display: flex;
     flex-direction: column;
@@ -1447,7 +1455,9 @@ hr {
     display: none;
 }
 
-
+p.total-price {
+    padding: 0 5px;
+}
 
 .item:hover .trash {
     display: block;
@@ -1494,6 +1504,10 @@ hr {
 
 .item-bought {
     text-decoration: line-through;
+}
+
+button.delete-article-liste-btn {
+    background-color: transparent;
 }
 
 /*************Composant ajout articles************************/
