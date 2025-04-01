@@ -1,17 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("connection add-list");
-    const closeButton = document.querySelector(".close-add-list");
-    const addListButton = document.querySelector(".add-list-link");
-    const popup = document.getElementById("list-popup"); // div exterieure
-    const popupContainer = document.querySelector("div.liste-add-container"); // div interieure
 
-    if (closeButton) {
-        closeButton.addEventListener('click', () => {
+    const addListButton = document.querySelector(".add-list-link");
+    const popup = document.getElementById("list-popup");
+    const popupContainer = document.querySelector("div.liste-add-container");
+    const closeBtn = document.querySelector(".close-add-list");
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
             popup.classList.remove("visible");
         });
     }
 
-    if (addListButton && popup) {
+    if (addListButton && popup && popupContainer) {
         addListButton.addEventListener("click", (event) => {
             event.preventDefault();
             popup.classList.add("visible");
@@ -28,6 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
         });
     } else {
-        console.error("Un ou plusieurs éléments n'ont pas été trouvés dans le DOM.");
+        console.error("One or more elements were not found in the DOM.");
     }
 });

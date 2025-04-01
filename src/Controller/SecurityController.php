@@ -62,6 +62,9 @@ class SecurityController extends AbstractController
         $user = new User();
         $user->setIsAdmin(false);
         $user->setImage('default-user-icon.svg'); 
+        $user->setYearSpend(0);
+        $user->setMonthSpend(0);
+        $user->setMonthBudget(0);
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

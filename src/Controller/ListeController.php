@@ -1,15 +1,14 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Liste;
 use App\Form\ListeType;
-use App\Repository\ListeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ArticleRepository;
 
 #[Route('/liste')]
 final class ListeController extends AbstractController
@@ -26,7 +25,6 @@ final class ListeController extends AbstractController
             $entityManager->persist($liste);
             $entityManager->flush();
 
-//            return $this->redirectToRoute('app_liste_index', [], Response::HTTP_SEE_OTHER);
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -37,10 +35,13 @@ final class ListeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_liste_show', methods: ['GET'])]
-    public function show(Liste $liste): Response
+    public function show(Liste $liste, ArticleRepository $articleRepository): Response
     {
+        $tousLesArticles = $articleRepository->findAll(); 
+
         return $this->render('liste/show.html.twig', [
             'liste' => $liste,
+            'articles' => $tousLesArticles, 
         ]);
     }
 
@@ -65,12 +66,11 @@ final class ListeController extends AbstractController
     #[Route('/{id}', name: 'app_liste_delete', methods: ['POST'])]
     public function delete(Request $request, Liste $liste, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$liste->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$liste->getId(), $request->request->get('_token'))) {
             $entityManager->remove($liste);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
-
 }

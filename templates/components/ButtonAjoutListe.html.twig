@@ -1,3 +1,36 @@
-<div{{ attributes }}>
-    <!-- component html -->
+<div class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <h2 class="list-article-title">Ajouter un article dans ma liste.</h2>
+        <p class="list-article-description">Ici, vous pouvez ajouter des articles anti-inflation.</p>
+        <form>
+        <table class="article-table">
+            <thead>
+                <tr>
+                    <th class="table-header-name">Nom</th>
+                    <th class="table-header-price">Prix</th>
+                    <th class="table-header-category">Catégorie</th>
+                    <th class="table-header-quantity">Quantité</th>
+                </tr>
+            </thead>
+            <tbody class="tbody-articles-add">
+            <tbody class="tbody-articles-add">
+            {% for article in articles %}
+            <tr class="table-row" data-article-id="{{ article.id }}">
+                <td class="table-cell-name">{{ article.nom }}</td>
+                <td class="table-cell-price">{{ article.prix }}€</td>
+                <td class="table-cell-category">{{ article.categorie.nom }}</td>
+                <td class="table-cell-quantity">
+                    <div class="quantity-control">
+                        <input min="0" type="number" placeholder="0" class="quantity-increment">
+                        <img src="{{ asset('images/green-card-icon.png') }}" alt="icon de panier vert"/>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <button class="add-article-s-btn">Ajouter</button>
+        </form>
+        </table>
+    </div>
 </div>
