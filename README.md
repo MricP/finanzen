@@ -1,5 +1,83 @@
 # TP Noté - PHP
 
+### Poisson d'avril
+![Poisson d'avril](https://image.over-blog.com/y7Rlwfcuj4PMZrHV_v3-DVz8Ui0=/filters:no_upscale()/image%2F0946180%2F20220331%2Fob_72d1bf_poisson-d-avril-gif-anime-a.gif)
+
+
+---
+
+## Installation et mise en place
+
+---
+
+### Prérequis 
+- Installer Git ([Git](https://git-scm.com/downloads))
+- Installer PHP ([PHP](https://www.php.net/downloads.php))
+- Installer Composer ([Composer](https://getcomposer.org/download/))
+- Installer un IDE ([VS Code](https://code.visualstudio.com/download) | [PHP Storm](https://www.jetbrains.com/fr-fr/phpstorm/download/#section=windows))
+
+**Suivez les instructions d'installation respectives des logiciels ci-dessus pour préparer votre environnement de développement.**
+
+### Vérifier l'installation de Git, PHP et Composer
+1. Ouvrez un CLI (Interface en ligne de commande) comme un Shell ou un Terminal
+2. Vérifier l'installation de Git en utilisant la commande pour afficher sa version :
+```
+git -v
+```
+Si Git est bien installé, vous devriez pouvoir voir un message similaire à celui-ci (qui changera en fonction de votre version de Git):
+```
+git version 2.45.2.windows.1
+```
+**Dans le cas contraire, Git n'est pas installé sur votre ordinateur.**
+- [Télécharger Git ici](https://git-scm.com/downloads)
+
+3. Vérifier l'installation de PHP en utilisant la commande pour afficher sa version :
+```
+php -v
+```
+Si PHP est bien installé, vous devriez pouvoir voir un message similaire à celui-ci (qui changera en fonction de votre version de PHP):
+```
+PHP 8.2.21 (cli) (built: Jul  2 2024 14:02:29) (ZTS Visual C++ 2019 x64)
+Copyright (c) The PHP Group
+Zend Engine v4.2.21, Copyright (c) Zend Technologies
+```
+**Dans le cas contraire, PHP n'est pas installé sur votre ordinateur.**
+- [Télécharger PHP](https://www.php.net/downloads.php)
+
+4. Vérifier l'installation de Composer en utilisant la commande pour afficher sa version :
+```
+composer -V
+```
+Si Composer est bien installé, vous devriez pouvoir voir un message similaire à celui-ci (qui changera en fonction de votre version de Composer):
+```
+Composer version 2.7.7 2024-06-10 22:11:12
+PHP version 8.2.21 (C:\PHP8\php.exe)
+Run the "diagnose" command to get more detailed diagnostics output.
+```
+**Dans le cas contraire, Composer n'est pas installé sur votre ordinateur.**
+- [Télécharger Composer ici](https://getcomposer.org/download/)
+
+### Mettre en place le projet
+1. Cloner le projet avec Git :
+- Par HTTPS :
+```
+git clone https://forge.univ-lyon1.fr/mathieu.corne/finanzen.git
+```
+- Par SSH (si configuré) :
+```
+git clone git@forge.univ-lyon1.fr:mathieu.corne/finanzen.git
+```
+2. Installer les dépendances de Symfony avec Composer
+```
+composer i
+```
+3. Dans un terminal dédié, lancer le serveur PHP sur le port 5500 dans le dossier public du projet :
+```
+cd public
+php -S 127.0.0.1:5500
+```
+**Le terminal devra rester en cours d'exécution tant que l'on souhaite utiliser le serveur PHP**
+
 ---
 
 ## Notation
