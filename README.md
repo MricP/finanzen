@@ -121,6 +121,15 @@ mail : minh@ad.fr
 mot de passe : admin12
 ```
 
+## Espace admin
+
+---
+Pour la sécurité du /admin, il y a un url different et caché :
+```
+/admin-x7y2z9w4
+
+```
+/admin-x7y2z9w4
 ---
 
 ## Notation
