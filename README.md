@@ -75,9 +75,26 @@ composer i
 ```
 cd public
 php -S 127.0.0.1:5500
+
 ```
 **Le terminal devra rester en cours d'exécution tant que l'on souhaite utiliser le serveur PHP**
 
+ou bien lancer WAMPP Server et créer une base de donnée :
+```
+finanzen
+
+```
+Pour créer l'architecture de la base de données il faut effectuer la commande suivante dans un terminal de commande 
+
+```
+php bin/console do:mi:mi
+
+```
+Pour remplir la base de données, il faut effectuer la commande suivante dans un terminal de commande 
+
+```
+php bin/console doctrine:fixtures:loa
+```
 ---
 
 ## Notation
