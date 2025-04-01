@@ -134,4 +134,17 @@ final class ListeArticleController extends AbstractController
 
         return new JsonResponse(['status' => 'Invalid request'], 400);
     }
+
+    #[Route('/toggle/{id}', name: 'app_liste_article_toggle', methods: ['POST'])]
+    public function toggleEstAchete(Request $request, ListeArticle $listeArticle, EntityManagerInterface $entityManager): JsonResponse
+    {
+        if ($request->isXmlHttpRequest()) {
+            $listeArticle->setEstAchete(!$listeArticle->isEstAchete());
+            $entityManager->flush();
+
+            return new JsonResponse(['status' => 'success'], 200);
+        }
+
+        return new JsonResponse(['status' => 'Invalid request'], 400);
+    }
 }

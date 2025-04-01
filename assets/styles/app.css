@@ -1402,7 +1402,7 @@ div.liste-add-container form {
 .item {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
     align-items: center;
     justify-items: center;
     width: 100%;
