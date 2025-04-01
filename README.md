@@ -95,6 +95,32 @@ Pour remplir la base de données, il faut effectuer la commande suivante dans un
 ```
 php bin/console doctrine:fixtures:loa
 ```
+En cas d'erreur (sur le do:mi:mi), supprimer votre base de données et recréer la, puis enlevez toutes les versions dans le dossier migration/ et effectuer ces commandes :
+
+```
+php bin/console do:mi:di
+php bin/console do:mi:mi
+php bin/console doctrine:fixtures:loa
+
+
+```
+Pour remplir la base de données, il faut effectuer la commande suivante dans un terminal de commande 
+
+```
+php bin/console doctrine:fixtures:loa
+```
+---
+
+## Connexion
+
+---
+Le compte déja créé grâce à la fixture est un compte admin :
+
+```
+mail : minh@ad.fr
+mot de passe : admin12
+```
+
 ---
 
 ## Notation
