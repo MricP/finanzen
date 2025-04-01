@@ -8,16 +8,18 @@
     <script src="{{ asset('js/list-details.js') }}"></script>
     <script src="{{ asset('js/add-articles-in-list.js') }}"></script>
     <script src="{{ asset('js/delete-articles-in-list.js') }}"></script>
+    <script src="{{ asset('js/toggle-articles.js') }}"></script>
 {% endblock %}
 
 {% block body %}
     <div id="specific-list-container">
         <div class="ajout-articles">
             <button class="add-button-modal">
-                <img src="{{ asset('images/liste-articles.svg') }}" alt="fond du bouton"/>
+                {# <img src="{{ asset('images/liste-articles.svg') }}" alt="fond du bouton"/>
                 <span>
                     <img src="{{ asset('images/plus-icon.png') }}" alt="icon plus"/>
-                </span>
+                </span> #}
+                AJOUTER DES ARTICLES
             </button>
             {{ component('ButtonAjoutListe', { articles: articles }) }}
         </div>
@@ -35,8 +37,8 @@
             <div id="list-items">
                 <ul id="items">
                     {% for item in liste.listeArticles %}
-                        <li class="item" data-id="{{ item.id }}">
-                            <p>{{ item.articles.nom }}</p>
+                        <li class="item " data-id="{{ item.id }}">
+                            <p id="item-name" class="item{% if item.estAchete %} item-bought{% endif %}">{{ item.articles.nom }}</p>
                             <input type="number" 
                                    value="{{ item.quantite }}" 
                                    min="0" 

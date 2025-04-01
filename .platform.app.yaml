@@ -1,0 +1,21 @@
+# .platform.app.yaml
+name: app
+type: "php:8.2.28"
+disk: 2048
+
+hooks:
+    build: |
+        set -e
+        composer install --no-dev --optimize-autoloader
+        php bin/console cache:clear --env=prod
+        php bin/console cache:warmup --env=prod
+        php bin/console assets:install --env=prod
+
+relationships:
+    database: "mysqldb:mysql"
+
+web:
+    locations:
+        "/":
+            root: "public"
+            passthru: "/index.php"

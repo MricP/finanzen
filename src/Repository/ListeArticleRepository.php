@@ -43,12 +43,13 @@ class ListeArticleRepository extends ServiceEntityRepository
             ->where('la.est_achete = true')
             ->andWhere('u.id = :userId')
             ->setParameter('userId', $user->getId())
+            ->groupBy('date_creation')
             ->getQuery()
             ->getResult();
             
             $depensesParMois = [];
             
-
+            dump($results);
             foreach ($results as $row) {
                 $date = $row['date_creation']; 
                 if ($date instanceof \DateTimeInterface) {
@@ -80,9 +81,9 @@ class ListeArticleRepository extends ServiceEntityRepository
             ->join('a.categorie', 'c')
             ->join('l.user', 'u')
             ->where('la.est_achete = true')
-            ->andWhere('l.dateCreation LIKE :currentMonthPattern') 
+            ->andWhere('l.dateCreation LIKE :currentMonth') 
             ->andWhere('u.id = :userId')
-            ->setParameter('currentMonthPattern', '%-' . $currentMonth . '-%') 
+            ->setParameter('currentMonth', '%-' . $currentMonth . '-%') 
             ->setParameter('userId', $user->getId())
             ->groupBy('c.nom')
             ->getQuery()

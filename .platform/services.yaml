@@ -1,0 +1,5 @@
+
+mysqldb:
+    type: mysql:9.1.0
+    disk: 256
+

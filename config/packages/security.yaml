@@ -5,12 +5,9 @@ security:
 
     access_control:
         - { path: ^/admin-x7y2z9w4, roles: ROLE_ADMIN }
-        - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: /register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: /set-pseudo, roles: ROLE_USER }
         - { path: /home, roles: ROLE_USER }
-        - { path: /list, roles: ROLE_USER }
-        - { path: /list/*, roles: ROLE_USER }
+        - { path: /liste, roles: ROLE_USER }
+        - { path: /liste/*, roles: ROLE_USER }
         - { path: /categorie/*, roles: ROLE_ADMIN }
         - { path: /magasin/*, roles: ROLE_ADMIN }
         - { path: /article/*, roles: ROLE_ADMIN }

@@ -79,4 +79,9 @@ class ListeArticle
 
         return $this;
     }
+
+    public function getTotal(): float
+    {
+        return $this->quantite * $this->articles->getPrix();
+    }
 }
