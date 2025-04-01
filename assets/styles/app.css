@@ -571,6 +571,15 @@ svg.trash {
     margin: 0;
 }
 
+.add-button-modal{
+    background-color: var(--color-primary);
+    color: var(--text-color-secondary);
+    padding: 10px;
+    border: none;
+}
+
+
+
 .list-header p {
     width: 100%;
     text-align: right;
