@@ -1,9 +1,0 @@
-
-https://{default}/:
-    type: redirect
-    to: https://www.{default}/
-
-https://www.{default}/:
-    type: upstream
-    upstream: app:http
-
