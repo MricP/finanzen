@@ -1,9 +1,5 @@
 # TP Noté - PHP
 
-### Poisson d'avril
-![Poisson d'avril](https://image.over-blog.com/y7Rlwfcuj4PMZrHV_v3-DVz8Ui0=/filters:no_upscale()/image%2F0946180%2F20220331%2Fob_72d1bf_poisson-d-avril-gif-anime-a.gif)
-
-
 ---
 
 ## Installation et mise en place
